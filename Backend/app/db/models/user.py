@@ -3,8 +3,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from db.client import Base
 
 
-Base = declarative_base()
 
+Base = declarative_base()
+#definimos clase de usuario (el modelo de usuario)
 class User(Base):
     __tablename__ = "usuario"  
 
@@ -21,4 +22,5 @@ class User(Base):
     piso = Column(String(40), nullable=True)
     codigopostal = Column(Integer, nullable=True)
     ciudad = Column(String(50), nullable=True)
+
 

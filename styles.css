@@ -1,5 +1,27 @@
 
 
+.imgportada{
+max-width: fit-content;  
+max-height: 10%;
+}
+
+/*Formarto oferta de iniciar sesión*/
+.ofertalogin{
+  text-size-adjust: 40%;
+  text-decoration-color: grey;
+
+}
+
+
+/* Formato columnas main*/
+.resenas{
+  display: flex; /* Alinea los elementos en una fila*/
+
+}
+
+.crearcuenta{
+  display: flex; /* Alinea los elementos en una fila*/
+}
 
 
 /* Formato de reseñas en el index*/

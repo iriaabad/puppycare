@@ -6,7 +6,7 @@ class UserBase(BaseModel):
     nombre: Optional [str] = None
     apellido1: Optional [str] = None
     apellido2: Optional[str] = None
-    email: str
+    email: EmailStr
     latitud: Optional[float] = None
     longitud: Optional[float] = None
     calle: Optional[str] = None
@@ -17,7 +17,7 @@ class UserBase(BaseModel):
 
 # Este es el esquema para leer un usuario, excluyendo la contraseña
 class User(UserBase):
-    id_usuario: int  # Asegúrate de que este campo coincide con el nombre de tu columna en la DB
+    id_usuario: int  
 
     class Config:
         orm_mode = True  # Para poder trabajar con instancias ORM de SQLAlchemy
@@ -44,7 +44,7 @@ class UserResponse(BaseModel):
     nombre: Optional[str] = None
     apellido1: Optional[str] = None
     apellido2: Optional[str] = None
-    email: str
+    email: Optional [EmailStr] = None
     latitud: Optional[float] = None
     longitud: Optional[float] = None
     calle: Optional[str] = None

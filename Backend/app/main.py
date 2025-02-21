@@ -5,7 +5,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user_auth, users
+from routers import user_auth, users, excepciones
 
 
 
@@ -28,6 +28,7 @@ app.add_middleware(
 
 app.include_router(user_auth.router)
 app.include_router(users.router)
+
 
 
 
