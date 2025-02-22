@@ -15,35 +15,39 @@
     <div id="header-placeholder"></div>
     <div>
       <h1>Puppy Care</h1>
-      <img src="img/Portada.png" alt="" srcset="">
+      <img src="img/Portada.png" alt="" srcset="" class="imgportada">
     </div>
   </header>
   <main>
     <div>
+    <div class="crearcuenta">
       <h1>Busca un cuidador para tu mascota</h1>
       <p>
         ¿Necesitas un cuidador para tu mascota? Únete a nuestra comunidad de clientes satisfechos y disfruta de una
         experiencia sencilla, segura y confiable.
         Tu mascota estará en buenas manos.
       </p>
-      <form action="" method="get">
+      <form action="" method="post">
         <label for="correo"></label>
-        <input type="email" name="correo" id="Correo" value="Email" required><br>
+        <input type="email" name="correo" id="correo" value="Email" required class="form_box"><br>
         <label for="nombre"></label>
-        <input type="text" name="nombre" id="nombre" value="Nombre" required><br>
+        <input type="text" name="nombre" id="nombre" value="Nombre"  class="form_box"><br>
         <label for="apellidos"></label>
-        <input type="text" name="apellidos" id="apellidos" required value="Apellidos"><br>
+        <input type="text" name="apellidos" id="apellidos"  value="Apellidos" class="form_box"><br>
+        <label for="password"></label>
+        <input type="text" name="password" id="password" required value="Contraseña" class="form_box"><br>
         <button type="submit">Crear cuenta</button>
       </form>
-      <p>¿Ya tienes cuenta? Inicia sesión</p>
+      <p class="ofertalogin">¿Ya tienes cuenta?<a href=""> Inicia sesión</a></p>
     </div>
-    <div id="resenas-placeholder"></div>
+    <div id="resenas-placeholder" class="resenas"></div>
+  </div>
   </main>
   <div id="footer-placeholder"></div>
 
   <!-- Enlace al script externo -->
-  <script src="script.js"></script>
-  <script src="resenas.js"></script>
+  <script src="scripts/script.js"></script>
+  <script src="scripts/resenas.js"></script>
 
 </body>
 

@@ -1,17 +1,25 @@
+import email
 from fastapi import APIRouter, Depends, HTTPException, status, FastAPI
+from typing import Annotated
+import jwt
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from jwt import PyJWK, PyJWKError
+from jwt import PyJWK, PyJWKError, decode,encode
 from datetime import datetime, timedelta
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
+from sqlmodel import Session
 from db.models.user import User
+from db.models.auth import Token, TokenData
 from schemas.user import UserResponse
+from db.cruds.user import buscar_usuario_en_bd_por_email
+from db.client import SessionLocal, get_db
+from .excepciones import auth_exception
 
 
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRACION_MINUTOS = 30
 SECRET = "f400e41e9995b5b60849ad9406956e4fe2772a6a78b39d15c23858ec90fb8077"
 
 router = APIRouter(prefix="/auth",
@@ -20,65 +28,59 @@ router = APIRouter(prefix="/auth",
 
 oauth2 = OAuth2PasswordBearer(tokenUrl="login")
 
+
+
 crypt = CryptContext(schemes=["bcrypt"])
-
-def search_user_db(username: str):
-    if username in users_db:
-        return UserDB(**users_db[username])
-
-
-def search_user(username: str):
-    if username in users_db:
-        return User(**users_db[username])
-    
-
-    async def auth_user(token: str = Depends(oauth2)):
-        pass
-   # exception = HTTPException(
-      #  status_code=status.HTTP_401_UNAUTHORIZED,
-       # detail="Credenciales de autenticación inválidas",
-        #headers={"WWW-Authenticate": "Bearer"})
-
-    try:
-        username = jwt.decode(token, SECRET, algorithms=[ALGORITHM]).get("sub")
-        if username is None:
-            raise exception
-
-    except JWTError:
-        raise exception
-
-    return search_user(username)
 
 
 async def current_user(user: User = Depends()):
-    if user.disabled:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Usuario inactivo")
-
-    return user
+        
+        return user
 
 
 @router.post("/login")
-async def login(form: OAuth2PasswordRequestForm = Depends()):
+async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
 
-    user_db = users_db.get(form.username)
-    if not user_db:
-        raise HTTPException(
+    #Buscar usuario por email
+        user = buscar_usuario_en_bd_por_email(db, form.username)    
+        
+        if not user:
+            raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="El usuario no es correcto")
 
-    user = search_user_db(form.username)
+        if not crypt.verify(form.password, user.hashed_password): 
+            raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="La contraseña no es correcta"
+        )
 
-    if not crypt.verify(form.password, user.password):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="La contraseña no es correcta")
+        access_token = {
+        "sub": user.email,
+        "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRACION_MINUTOS)
+    }
 
-    access_token = {"sub": user.username,
-                    "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_DURATION)}
+        return {
+        "access_token": jwt.encode(access_token, SECRET, algorithm=ALGORITHM),
+        "token_type": "bearer"
+    }
 
-    return {"access_token": jwt.encode(access_token, SECRET, algorithm=ALGORITHM), "token_type": "bearer"}
+async def get_current_user(token: Annotated[str, Depends(oauth2)], db: Session = Depends(get_db)):
+    try:
+        payload = jwt.decode(token, SECRET, algorithms=[ALGORITHM])
+        username = payload.get("sub")
+        if username is None:
+            raise auth_exception
+        token_data = TokenData(username=username)
 
-
-@router.get("/users/me")
-async def me(user: User = Depends(current_user)):
+    except InvalidTokenError:
+        raise auth_exception
+    user = buscar_usuario_en_bd_por_email(db, email=token_data.username)
+    if user is None:
+        raise auth_exception
     return user
+
+
+@router.get("/me", response_model=UserResponse)
+async def read_users_me(current_user: User = Depends(get_current_user)):
+    # Aquí current_user ya es el usuario validado
+    return current_user
