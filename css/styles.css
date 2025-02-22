@@ -1,0 +1,151 @@
+
+
+/*Formato de la imagen del header*/
+.header-container {
+  position: relative;
+  width: 100%;
+}
+
+.imgportada{
+  width: 100vw;  
+  height: 40vh;  
+  object-fit: cover;
+  object-position: center 40%;
+;}
+
+
+.header-container h1 {
+  position: absolute;
+  font-family:Impact;
+  top: 18%;  /* Centrar verticalmente */
+  left: 30%; 
+  transform: translate(-50%, -50%); /* Ajuste fino */
+  color: white; /* Asegurar visibilidad */
+  font-size: 8rem; /* Ajustar tamaño según necesidad */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Para mejorar contraste */
+}
+
+
+
+
+/*Formarto oferta de iniciar sesión*/
+.ofertalogin{
+  font-size: 0.7em; 
+  color: grey;
+}
+.ofertalogin a{
+  font-size: 1.3em; 
+  font-weight: bold;
+  color: darkgrey;
+  text-decoration:none;
+}
+
+.ofertalogin a:hover{
+  color: darkkhaki;
+  font-size: 1.5em; 
+  transition: 3ms;
+  text-decoration: underline;
+}
+
+
+
+.contenedor-main {
+  display: flex;
+  justify-content: space-between; /* Espaciado entre columnas */
+  gap: 20px; /* Espacio entre los elementos */
+  padding: 5px;
+}
+
+.crearcuenta, .resenas {
+  flex: 1; /* Ambas columnas toman el mismo espacio */
+}
+
+/* Asegurar que el contenido no sea demasiado ancho */
+.crearcuenta {
+  max-width: 49%;
+}
+
+.resenas {
+  max-width: 49%;
+}
+
+
+
+/* Formato de reseñas en el index*/
+
+.carousel-container {
+    width: auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Evita que los elementos salten de línea */
+  }
+
+  .carousel-resena {
+      display: flex; /* Alinea los elementos en una fila*/
+      transition: transform 0.8s ease-in-out; 
+  }
+  
+  .cardResena {
+      flex: 0 0 90%; /* Cada tarjeta ocupa el 100% del contenedor */
+      transition: 0.3s;
+      border: 1px solid #ddd;
+      padding: 5%;
+      background: white;
+      text-align: center;
+      border-radius: 10px;
+  }
+  .cardResena:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .cardResena img {
+    flex: inherit;
+    height: 10px;
+    width: 10px;
+    margin-right: 20px; /* Espacio entre la imagen y el texto */
+  }
+
+  .puntuacionestrellas i {
+    color: gold;
+    font-size: 1.2em;
+    margin-right: 2px;
+  }
+
+
+/* Formato formulario*/
+
+  .form-group {
+    margin-bottom: 5px;
+}
+
+.form-box {
+    width: 100%;
+    padding: 12px 10px 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-box:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.form-box:focus + .label,
+.form-box:not(:placeholder-shown) + .label {
+    top: 0;
+    font-size: 12px;
+    color: #3b82f6;}

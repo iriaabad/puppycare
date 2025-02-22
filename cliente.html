@@ -1,15 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área de clientes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <title>Área de clientes</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <header>
-        <div id="header-placeholder"></div>
-    </header>
- <!-- Enlace al script externo -->
-  <script src="script.js"></script>
+  <header>
+    <div id="header-placeholder"></div>
+    <div class="header-container">
+      <h1>Puppy Care</h1>
+      <img src="img/Portada.png" alt="Portada" class="imgportada">
+    </div>
+  </header>
+  <main>
+    <div class="contenedor-main">
+    <div class="crearcuenta">
+      <h1>Busca un cuidador para tu mascota</h1>
+      <p>
+        ¿Necesitas un cuidador para tu mascota? Únete a nuestra comunidad de clientes satisfechos y disfruta de una
+        experiencia sencilla, segura y confiable.
+        Tu mascota estará en buenas manos.
+      </p>
+      <form id="formulariocrearcuenta">
+        <div class="form-group">
+          <label for="email" class="label"></label>
+          <input type="email" name="email" id="email" required class="form-box" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="nombre" class="label"></label>
+          <input type="text" name="nombre" id="nombre" class="form-box" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+            <label for="apellido1" class="label"></label>
+            <input type="text" name="apellido1" id="apellido1" class="form-box" placeholder="Primer apellido">
+        </div>
+        <div class="form-group">
+          <label for="apellido2" class="label"></label>
+          <input type="text" name="apellido2" id="apellido2" class="form-box" placeholder="Segundo apellido">
+      </div>
+        <div class="form-group">
+            <label for="password" class="label"></label>
+            <input type="password" name="password" id="password" required class="form-box" placeholder="Contraseña">
+        </div>
+      <button type="submit">Crear cuenta</button>
+      </form>
+
+      <p class="ofertalogin">¿Ya tienes cuenta? <a href="">Inicia sesión</a></p>
+    </div>
+    <div id="resenas-placeholder" class="resenas"></div>
+  </div>
+  </main>
+  <div id="footer-placeholder"></div>
+
+  <!-- Enlace a los scripts externos -->
+  <script src="scripts/script.js"></script>
+  <script src="scripts/resenas.js"></script>
+  <script src="scripts/crearcuenta.js"></script>
+
+
+
 </body>
+
+
 </html>

@@ -20,7 +20,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 # Crear un usuario en la base de datos
-@router.post("/", response_model= UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/create", response_model= UserResponse, status_code=status.HTTP_201_CREATED)
 async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Verificar si el usuario ya existe
     existing_user = buscar_usuario_en_bd_por_email(db, email=user.email)

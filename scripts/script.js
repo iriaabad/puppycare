@@ -8,7 +8,11 @@ fetch('header.html')
   })
   .then(data => {
     document.getElementById('header-placeholder').innerHTML = data;
+    const script = document.createElement('script');
+    script.src = 'scripts/userdisplaymenu.js';
+    document.body.appendChild(script);
   })
+  
   .catch(error => console.error('Error:', error));
 
 

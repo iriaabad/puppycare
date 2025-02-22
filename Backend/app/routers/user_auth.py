@@ -1,5 +1,6 @@
 import email
-from fastapi import APIRouter, Depends, HTTPException, status, FastAPI
+from urllib import response
+from fastapi import APIRouter, Depends, HTTPException, status, FastAPI, Response, Cookie, Request
 from typing import Annotated
 import jwt
 from pydantic import BaseModel
@@ -16,6 +17,8 @@ from schemas.user import UserResponse
 from db.cruds.user import buscar_usuario_en_bd_por_email
 from db.client import SessionLocal, get_db
 from .excepciones import auth_exception
+from fastapi.responses import  JSONResponse
+
 
 
 ALGORITHM = "HS256"
@@ -54,15 +57,31 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
             detail="La contraseña no es correcta"
         )
 
-        access_token = {
-        "sub": user.email,
-        "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRACION_MINUTOS)
-    }
+         # Generar el payload con la expiración del token
+        expiracion_fecha = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRACION_MINUTOS)
+        payload = {
+        "sub": user.email,  # 'sub' es un campo estándar que identifica al sujeto (usuario)
+        "exp": expiracion_fecha  # Fecha de expiración del token
+        }
 
-        return {
-        "access_token": jwt.encode(access_token, SECRET, algorithm=ALGORITHM),
-        "token_type": "bearer"
-    }
+        # Codificar el token JWT con el payload y la clave secreta
+        access_token = jwt.encode(payload, SECRET, algorithm=ALGORITHM)
+
+
+         # Guardar el token en una cookie
+        response.establecer_cookie(
+        key="access_token",  # Nombre de la cookie
+        value=access_token,  # Almaceno el token
+        max_age=ACCESS_TOKEN_EXPIRACION_MINUTOS,  # Misma duración que el token
+        expires=datetime.utcnow() + ACCESS_TOKEN_EXPIRACION_MINUTOS,  # Misma fecha de expiracion
+        httponly=True,  # Hace que la cookie solo sea accesible por el servidor, no a través de JavaScript
+        secure=True,  # Solo se enviará a través de HTTPS
+        samesite="Strict",  # Esto ayuda a proteger contra ataques CSRF (se puede cambiar a "Lax" para menos restricciones)
+    )
+        
+        return JSONResponse(content={"message": "Usuario logado correctamente"})
+
+     
 
 async def get_current_user(token: Annotated[str, Depends(oauth2)], db: Session = Depends(get_db)):
     try:
@@ -80,7 +99,40 @@ async def get_current_user(token: Annotated[str, Depends(oauth2)], db: Session =
     return user
 
 
+#obtiene el token y valida el usuario
 @router.get("/me", response_model=UserResponse)
 async def read_users_me(current_user: User = Depends(get_current_user)):
     # Aquí current_user ya es el usuario validado
     return current_user
+
+
+#Obtiene la validación del token desde la cookie
+@router.get("/users/me")
+async def read_users_me(request: Request ):
+    # Obtener el token de la cookie
+    token = request.cookies.get("access_token")
+
+    if token is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token not found in cookies",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Verificar y decodificar el token
+    user = verificar_token(token) #Uso la funcion definida para ese fin
+
+    return {"user": user}
+
+
+#   Función para verificar el token
+async def verificar_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET, algorithms=[ALGORITHM])
+        return payload
+    except InvalidTokenError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token inválido o expirado",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
