@@ -30,11 +30,11 @@
 
 /*Formarto oferta de iniciar sesión*/
 .ofertalogin{
-  font-size: 0.7em; 
+  font-size: 0.8em; 
   color: grey;
 }
 .ofertalogin a{
-  font-size: 1.3em; 
+  font-size: 1.2em; 
   font-weight: bold;
   color: darkgrey;
   text-decoration:none;
@@ -113,15 +113,31 @@
     margin-right: 2px;
   }
 
+/* Formato formulario inicio sesión*/
 
-/* Formato formulario*/
+.form-login{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;  
+  padding: 3%;
+
+}
+
+
+/* Formato formulario crear cuenta*/
+
+.form-cuenta{
+  margin-left: 7%;
+
+}
 
   .form-group {
     margin-bottom: 5px;
 }
 
 .form-box {
-    width: 100%;
+    width: 70%;
     padding: 12px 10px 12px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;

@@ -1,5 +1,5 @@
 // script que trael el header a la página
-fetch('header.html')
+fetch('partials/header.html')
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al cargar la cabecera');
@@ -16,8 +16,8 @@ fetch('header.html')
   .catch(error => console.error('Error:', error));
 
 
-  // script que trael el footer a la página
-fetch('footer.html')
+// script que trael el footer a la página
+fetch('partials/footer.html')
 .then(response => {
   if (!response.ok) {
     throw new Error('Error al cargar el footer');
@@ -29,4 +29,5 @@ fetch('footer.html')
 })
 .catch(error => console.error('Error:', error));
 
+ 
  
