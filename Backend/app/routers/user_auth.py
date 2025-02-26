@@ -130,12 +130,6 @@ async def get_current_user(token: Annotated[str, Depends(oauth2)], db: Session =
     return user
 
 
-#obtiene el token y valida el usuario
-@router.get("/me", response_model=UserResponse)
-async def read_users_me(current_user: User = Depends(get_current_user)):
-    # Aquí current_user ya es el usuario validado
-    return current_user
-
 @router.get("/users/me")
 async def read_users_me(request: Request, db: Session = Depends(get_db)):
     # Obtener el token de la cookie
@@ -162,8 +156,11 @@ async def read_users_me(request: Request, db: Session = Depends(get_db)):
 
     # Devolver los datos del usuario
     return {
+        "id_usuario": user.id_usuario,
         "email": user.email,
         "nombre": user.nombre,
+        "apellido1": user.apellido1,
+        "apellido2": user.apellido2,
     }
 
 

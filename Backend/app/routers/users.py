@@ -2,12 +2,12 @@
 import email
 from fastapi import APIRouter, Depends, HTTPException, status, FastAPI
 from sqlalchemy.orm import Session
-from db.cruds.user import UserCreate, buscar_usuario_en_bd_por_email, anadir_usuario_a_bd
+from db.cruds.user import UserCreate, buscar_usuario_en_bd_por_email, anadir_usuario_a_bd, actualizar_usuario_en_bd
 from db.client import get_db, SessionLocal
-from schemas.user import UserBase, UserCreate, UserResponse
+from schemas.user import UserBase, UserCreate, UserResponse, UserUpdate
 from passlib.context import CryptContext
-from jwt import PyJWK, PyJWKError, encode
-
+from db.models.user import User
+from pydantic import BaseModel
 
 
 router = APIRouter(prefix="/users",
@@ -42,6 +42,35 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     
 
     #Devuelve la información del new user que acabamos de crear
-    return UserResponse.from_orm(new_user)
+    return UserResponse.model_validate(new_user)
 
 
+@router.get("/user/{id_usuario}", response_model= UserResponse) 
+def get_user(id_usuario: int, db: Session = Depends(get_db)):
+    # Buscar el usuario en la base de datos
+    user = db.query(User).filter(User.id_usuario == id_usuario).first()
+
+    # Si no se encuentra el usuario, lanzar un error 404
+    if user is None:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
+    # Devolver los datos del usuario en formato JSON
+    return UserResponse.model_validate(user)
+
+@router.put("/user/{id_usuario}")
+def update_user(id_usuario: int, user_actualizar: UserUpdate, db: Session = Depends(get_db)):
+    # Buscar el usuario en la base de datos
+    user_existente = db.query(User).filter(User.id_usuario == id_usuario).first()
+
+    # Si no se encuentra el usuario, lanzar un error 404
+    if user_existente is None:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    
+    # Llamar a la función para actualizar el usuario
+    updated_user = actualizar_usuario_en_bd(db=db, id_usuario=id_usuario, user_actualizar=user_actualizar)
+
+    if updated_user is None:  
+        raise HTTPException(status_code=500, detail="Error al actualizar usuario.")  # <-- Evitar que retorne None
+    
+    # Devolver los datos del usuario actualizado en formato JSON
+    return UserResponse.model_validate(updated_user)

@@ -1,7 +1,7 @@
 
   
   /* Estilos generales para la barra de navegación */
-.navbar-general {
+  .navbarcliente {
     display: flex;
     justify-content: space-between;
     align-items: left;
@@ -16,13 +16,13 @@
 }
 
 /* Contenedor de los enlaces */
-.navbar-links {
+.navbar-cliente {
     display: flex;
     gap: 20px;
 }
 
 /* Estilos de los enlaces */
-.navbar-links a {
+.navbar-cliente a {
     text-decoration: none;
     font-size: 1.2rem;
     color: #555;
@@ -32,28 +32,28 @@
 }
 
 /* Efecto hover en los enlaces */
-.navbar-links a:hover {
+.navbar-cliente a:hover {
     background: #e0e2e5;
     color: white;
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-    .navbar {
+    .navbarcliente {
         flex-direction: column;
         padding: 10px;
         position: relative;
 
     }
 
-    .navbar-links {
+    .navbar-cliente {
         flex-direction: column;
         text-align: center;
         gap: 10px;
     }
 
-    .navbar-links a {
-        display: block;
+    .navbar-cliente a {
+/*         display: block; */
         width: 100%;
     }
 }

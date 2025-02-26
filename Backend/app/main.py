@@ -39,5 +39,5 @@ app.include_router(users.router)
 
 @app.get("/")
 async def main():
-    return {"message": "Hello World"}
+    return {"message": "PuppyCare"}
  

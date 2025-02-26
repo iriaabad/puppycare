@@ -1,0 +1,59 @@
+body {
+    margin-top: 10%;
+}
+
+.areacliente {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.opcionescliente {
+    width: 45%;
+    list-style: none;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.opcionescliente li {
+    width: 100%;  /* ace que cada botón ocupe el ancho complet  */
+}
+
+.opcionescliente a {
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 5px 0;
+    width: 100%;  /* Para que los enlaces no estén pegados a los borde */ 
+    transition: background 0.3s; 
+}
+
+.opcionescliente a:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.image-container {
+    width: 45%;
+    height: 100%;
+    /* display: flex; */
+    align-items: center;
+}
+
+.image-container img {
+    max-width: 90%;
+    max-height: 90%;
+
+}
