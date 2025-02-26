@@ -1,5 +1,5 @@
 // script que trael el header a la página
-fetch('cliente/partials/menucliente.html')
+fetch('partials/menucliente.html')
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al cargar la cabecera');
@@ -9,7 +9,7 @@ fetch('cliente/partials/menucliente.html')
   .then(data => {
     document.getElementById('menucliente-placeholder').innerHTML = data;
     const script = document.createElement('script');
-    script.src = 'scripts/userdisplaymenu.js';
+   // script.src = 'scripts/userdisplaymenu.js';
     document.body.appendChild(script); //sustituir
   })
   

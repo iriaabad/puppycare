@@ -1,9 +1,10 @@
 import email
+from fastapi import HTTPException
 from http import client
 from pydantic import EmailStr
 from sqlalchemy.orm import Session
 from db.models.user import User
-from schemas.user import UserCreate, UserResponse
+from schemas.user import UserCreate, UserResponse, UserUpdate
 
 
 def anadir_usuario_a_bd(db: Session, user: UserCreate, hashed_password: str):
@@ -46,3 +47,23 @@ def buscar_user_completo(id: int, db: Session) -> UserResponse:
         return UserResponse(nombre=user.nombre, email=user.email, apellido1=user.apellido1)  # Retorna el esquema UserResponse
     return None  # Si no se encuentra el usuario, devuelve None
 
+def actualizar_usuario_en_bd(db: Session, id_usuario: int, user_actualizar: UserUpdate):
+    user_existente = db.query(User).filter(User.id_usuario == id_usuario).first()
+
+    if not user_existente:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
+    # Convertir el esquema Pydantic en un diccionario y excluir valores no proporcionados
+    datos_actualizados = user_actualizar.dict(exclude_unset=True)
+
+    # Evitar actualizar 'hashed_password' si no se proporciona
+    if "hashed_password" in datos_actualizados:
+        datos_actualizados.pop("hashed_password", None)
+
+    # Aplicar los cambios a la instancia de la base de datos
+    for key, value in datos_actualizados.items():
+        setattr(user_existente, key, value)
+
+    db.commit()
+    db.refresh(user_existente)  # Asegurarse de obtener los datos actualizados desde la BD
+    return user_existente

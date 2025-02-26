@@ -1,5 +1,5 @@
 // script que trae el formulario login a la página
-fetch('partials/formulariologin.html')
+fetch('//localhost/puppyCare/PuppyCare/partials/formulariologin.html')
 .then(response => {
   if (!response.ok) {
     throw new Error('Error al cargar el formulario');
