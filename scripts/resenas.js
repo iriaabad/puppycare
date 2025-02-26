@@ -1,6 +1,6 @@
 
 // trae el contenido de resenas
-fetch('resenas.html')
+fetch('partials/resenas.html')
   .then(response => {
     if (!response.ok) {
       throw new Error('Error al cargar las reseñas');

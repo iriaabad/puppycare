@@ -44,13 +44,31 @@ class UserResponse(BaseModel):
     nombre: Optional[str] = None
     apellido1: Optional[str] = None
     apellido2: Optional[str] = None
-    email: Optional [EmailStr] = None
+    email: Optional[EmailStr] = None
     latitud: Optional[float] = None
     longitud: Optional[float] = None
     calle: Optional[str] = None
     numero: Optional[str] = None
     piso: Optional[str] = None
     codigopostal: Optional[int] = None
+    ciudad: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+# Esquema para actualizar un usuario
+class UserUpdate(BaseModel):
+    nombre: Optional[str] = None
+    apellido1: Optional[str] = None
+    apellido2: Optional[str] = None
+    email: Optional[EmailStr] = None
+    hashed_password: Optional[str] = None
+    latitud: Optional[float] = None
+    longitud: Optional[float] = None
+    calle: Optional[str] = None
+    numero: Optional[int] = None
+    piso: Optional[str] = None
+    codigopostal: Optional[str] = None
     ciudad: Optional[str] = None
 
     class Config:

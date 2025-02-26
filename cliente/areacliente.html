@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área cliente</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/menuprincipalcliente.css">
+
+  <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
+  <script src="scripts/login_mostrarcontenido.js"></script>
+</head>
+
+<body>
+  <header>
+    <div id="header-placeholder"></div>
+    <div class="header-container">
+      <h1 id="saludo-cliente"></h1>
+    </div>
+  </header>
+  <!-- Formulario de login -->
+  <div id="formulariologin" style="display: none;"></div>
+  <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+
+  <!-- Contenido si el cliente está autenticado -->
+  <div id="areacliente" class="areacliente" style="display: none;">
+    <div class="opcionescliente">
+      <!-- Aquí se insertará el menú con JavaScript -->
+      <a href="perfil.html">Mis datos</a>
+      <a href="mascotas.html">Mis mascotas</a>
+      <a href="mensajes.html">Hacer una reserva</a>
+      <a href="reservas.html">Ver mis reservas</a>
+      <a href="mensajes.html">Ver mis mensajes</a>
+    </div>
+
+    <!-- Imagen al otro lado -->
+    <div class="image-container">
+      <img src="img/perro.png" alt="Imagen simpática de perro">
+    </div>
+  </div>
+
+
+  </div>
+  <div id="footer-placeholder"></div>
+
+  <!-- Enlace a los scripts externos -->
+  <script src="//localhost/puppyCare/PuppyCare/scripts/headerdisplay.js"></script>
+  <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
+  <script src="scripts/mostrarmenucliente.js"></script>
+
+
+</body>
+
+</html>
