@@ -3,7 +3,7 @@ from fastapi import HTTPException
 from http import client
 from pydantic import EmailStr
 from sqlalchemy.orm import Session
-from db.models.user import User
+from db.models.models import User
 from schemas.user import UserCreate, UserResponse, UserUpdate
 
 
@@ -54,7 +54,7 @@ def actualizar_usuario_en_bd(db: Session, id_usuario: int, user_actualizar: User
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
 
     # Convertir el esquema Pydantic en un diccionario y excluir valores no proporcionados
-    datos_actualizados = user_actualizar.dict(exclude_unset=True)
+    datos_actualizados = user_actualizar.model_dump(exclude_unset=True)
 
     # Evitar actualizar 'hashed_password' si no se proporciona
     if "hashed_password" in datos_actualizados:
@@ -67,3 +67,13 @@ def actualizar_usuario_en_bd(db: Session, id_usuario: int, user_actualizar: User
     db.commit()
     db.refresh(user_existente)  # Asegurarse de obtener los datos actualizados desde la BD
     return user_existente
+
+
+# Eliminar un usuario de la base de datos
+def eliminar_usuario_de_bd(db: Session, id_usuario: int):
+    usuario = db.query(User).filter(User.id_usuario == id_usuario).first()
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    db.delete(usuario)
+    db.commit()
+    return usuario

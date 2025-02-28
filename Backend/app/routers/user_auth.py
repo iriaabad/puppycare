@@ -14,7 +14,7 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from sqlalchemy import false
 from sqlmodel import Session
-from db.models.user import User
+from db.models.models import User
 from db.models.auth import Token, TokenData
 from schemas.user import UserResponse
 from db.cruds.user import buscar_usuario_en_bd_por_email
