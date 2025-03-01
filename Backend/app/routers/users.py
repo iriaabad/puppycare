@@ -3,10 +3,12 @@ import email
 from fastapi import APIRouter, Depends, HTTPException, status, FastAPI
 from sqlalchemy.orm import Session
 from db.cruds.user import UserCreate, buscar_usuario_en_bd_por_email, anadir_usuario_a_bd, actualizar_usuario_en_bd
+from db.cruds.cliente import create_cliente
 from db.client import get_db, SessionLocal
 from schemas.user import UserBase, UserCreate, UserResponse, UserUpdate
+from schemas.cliente import ClienteBase, ClienteCreate
 from passlib.context import CryptContext
-from db.models.user import User
+from db.models.models import User, Cliente
 from pydantic import BaseModel
 
 
@@ -40,8 +42,11 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     if new_user is None:
         raise HTTPException(status_code=500, detail="Error al crear usuario.")  # <-- Evitar que retorne None
     
-
-    #Devuelve la información del new user que acabamos de crear
+    # Crear el cliente usando el id_usuario del nuevo usuario
+    cliente_data = ClienteCreate(usuario_id_usuario=new_user.id_usuario)
+    new_cliente = create_cliente(db, cliente_data)
+    
+    # Devuelve la información del usuario recién creado
     return UserResponse.model_validate(new_user)
 
 
