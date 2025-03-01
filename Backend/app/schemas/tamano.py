@@ -13,4 +13,4 @@ class TamanoResponse(TamanoBase):
     id_tamano: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

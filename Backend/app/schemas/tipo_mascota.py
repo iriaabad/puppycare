@@ -13,4 +13,4 @@ class TipoMascotaResponse(TipoMascotaBase):
     id_tipo_mascota: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

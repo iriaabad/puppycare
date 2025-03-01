@@ -20,7 +20,7 @@ class User(UserBase):
     id_usuario: int  
 
     class Config:
-        orm_mode = True  # Para poder trabajar con instancias ORM de SQLAlchemy
+        from_attributes = True
 
 
     # Esquema para crear un usuario (entrada de datos)
@@ -72,4 +72,4 @@ class UserUpdate(BaseModel):
     ciudad: Optional[str] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True

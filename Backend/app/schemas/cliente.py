@@ -10,4 +10,4 @@ class Cliente(ClienteBase):
     id_cliente: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

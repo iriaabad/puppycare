@@ -20,7 +20,7 @@ def update_cuidador(db: Session, id_cuidador: int, cuidador: CuidadorUpdate):
     if not db_cuidador:
         return None
 
-    for key, value in cuidador.dict(exclude_unset=True).items():
+    for key, value in cuidador.model_dump(exclude_unset=True).items():
         setattr(db_cuidador, key, value)
 
     db.commit()

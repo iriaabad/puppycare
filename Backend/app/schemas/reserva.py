@@ -20,4 +20,4 @@ class Reserva(ReservaBase):
     id_reserva: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
