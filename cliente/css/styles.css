@@ -1,5 +1,5 @@
 body{
-padding-top: 10%;
+padding-top: 5%;
 
 }
 
@@ -29,3 +29,10 @@ padding-top: 10%;
       .card p {
         margin: 4px 0;
       }
+
+      #map {
+        height: 500px; /* O cualquier otra altura */
+        width: 60vh;
+      }
+       
+     

@@ -4,36 +4,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservar servicios</title>
+  <title>Crear Reserva</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/menucliente.css">
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" >
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
   <script src="scripts/login_mostrarcontenido.js"></script>
 </head>
 
 <body>
-    <body>
-        <header>
-          <div id="menucliente-placeholder"></div>
-        </header>
-        <!-- Formulario de login -->
-        <div id="formulariologin" style="display: none;"></div>
-        <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+
+  <body>
+    <header>
+      <div id="menucliente-placeholder"></div>
+    </header>
+    <!-- Formulario de login -->
+    <div id="formulariologin" style="display: none;"></div>
+    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+
+    <!-- Contenido si el cliente está autenticado -->
+    <div id="areacliente" class="areacliente" style="display: none;">
+      <h1>Crear Reserva</h1>
+      <form id="reserva-form">
+        <!-- Campos del formulario de reserva -->
+         <h2>Búsqueda de cuidadores</h2>
+        <input type="date" name="fecha_inicio" required />
+        <input type="date" name="fecha_fin" required />
+        <input type="number" name="cantidad_mascotas" placeholder="Cantidad de Mascotas" required />
+        <!-- Campo oculto para el cuidador seleccionado -->
+        <input type="hidden" name="cuidador_id_cuidador" id="cuidador_id_cuidador" required />
+        <button type="submit">Crear Reserva</button>
+      </form>
+
+      <h2>Cuidadores Disponibles</h2>
+      <div id="map"></div>
       
-        <!-- Contenido si el cliente está autenticado -->
-        <div id="areacliente" class="areacliente" style="display: none;">
-      
-        </div>
-      
+    </div>
+    </div>
+    <div id="footer-placeholder"></div>
 
+    <!-- Enlace a los scripts externos -->
+    <script src="scripts/localizador_reserva.js"></script>
+    <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
+    <script src="scripts/mostrarmenucliente.js"></script>
 
-  </div>
-  <div id="footer-placeholder"></div>
+  </body>
 
-  <!-- Enlace a los scripts externos -->
-  <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
-  <script src="scripts/mostrarmenucliente.js"></script>
-
-</body>
 </html>
+

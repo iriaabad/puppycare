@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response.ok) {
                 alert("Usuario autenticado");
-                window.location.href = "//localhost/puppyCare/PuppyCare/cliente/areacliente.html";
+                window.location.reload();
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.detail}`);

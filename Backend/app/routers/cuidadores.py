@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from db.client import get_db
+from typing import List, Optional
+from db.models.models import Cuidador 
 from schemas.cuidador import CuidadorCreate, CuidadorUpdate, CuidadorResponse
 from db.cruds.cuidador import get_cuidador, get_cuidadores, create_cuidador, update_cuidador, delete_cuidador
 
@@ -9,6 +11,14 @@ router = APIRouter(prefix="/cuidadores", tags=["Cuidadores"])
 @router.get("/", response_model=list[CuidadorResponse])
 def obtener_cuidadores(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return get_cuidadores(db, skip, limit)
+
+@router.get("/select/", response_model=List[CuidadorResponse])
+def get_cuidadores(usuario_id_usuario: Optional[int] = None, db: Session = Depends(get_db)):
+    query = db.query(Cuidador)
+    if usuario_id_usuario is not None:
+        query = query.filter(Cuidador.usuario_id_usuario == usuario_id_usuario)
+    cuidadores = query.all()
+    return cuidadores
 
 @router.get("/{id_cuidador}", response_model=CuidadorResponse)
 def obtener_cuidador(id_cuidador: int, db: Session = Depends(get_db)):

@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response.ok) {
                 alert("Usuario creado con éxito");
+                window.location.reload()
                 console.log(await response.json());
             } else {
                 const errorData = await response.json();
