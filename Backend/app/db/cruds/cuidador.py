@@ -1,9 +1,19 @@
-from sqlalchemy.orm import Session
-from db.models.models import Cuidador
+from sqlalchemy.orm import Session, joinedload
+from db.models.models import Cuidador, User
 from schemas.cuidador import CuidadorCreate, CuidadorUpdate
+from typing import Optional
 
-def get_cuidador(db: Session, id_cuidador: int):
-    return db.query(Cuidador).filter(Cuidador.usuario_id_usuario == id_cuidador).first()
+
+def get_cuidador(db: Session, id_usuario: int):
+    return db.query(Cuidador).filter(Cuidador.usuario_id_usuario == id_usuario).first()
+
+def get_cuidadores_disponibles(db: Session, lat: float, lng: float, radius: float,
+    fecha_inicio: Optional[str] = None, fecha_fin: Optional[str] = None,
+    cantidad_mascotas: Optional[int] = None):
+    cuidadores = db.query(Cuidador).options(joinedload(Cuidador.usuario)).all()
+    return cuidadores
+
+
 
 def get_cuidadores(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Cuidador).offset(skip).limit(limit).all()

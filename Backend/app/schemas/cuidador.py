@@ -2,6 +2,7 @@ from decimal import Decimal
 from pydantic import BaseModel, Field
 from typing import Optional
 from typing_extensions import Annotated
+from schemas.user import UserResponse
 
 
 class CuidadorBase(BaseModel):
@@ -24,6 +25,7 @@ class CuidadorUpdate(CuidadorBase):
 class CuidadorResponse(CuidadorBase):
     id_cuidador: int
     usuario_id_usuario: int
+    usuario: UserResponse
 
     class Config:
         from_attributes = True

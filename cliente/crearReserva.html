@@ -29,9 +29,12 @@
       <form id="reserva-form">
         <!-- Campos del formulario de reserva -->
          <h2>Búsqueda de cuidadores</h2>
+         <p>Añade las fechas de la reserva para iniciar la búsqueda</p>
         <input type="date" name="fecha_inicio" required />
         <input type="date" name="fecha_fin" required />
         <input type="number" name="cantidad_mascotas" placeholder="Cantidad de Mascotas" required />
+        <button type="button" id="buscar-btn">Buscar</button>
+
         <!-- Campo oculto para el cuidador seleccionado -->
         <input type="hidden" name="cuidador_id_cuidador" id="cuidador_id_cuidador" required />
         <button type="submit">Crear Reserva</button>
@@ -39,7 +42,7 @@
 
       <h2>Cuidadores Disponibles</h2>
       <div id="map"></div>
-      
+
     </div>
     </div>
     <div id="footer-placeholder"></div>
