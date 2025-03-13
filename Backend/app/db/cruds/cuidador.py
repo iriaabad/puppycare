@@ -4,8 +4,9 @@ from schemas.cuidador import CuidadorCreate, CuidadorUpdate
 from typing import Optional
 
 
-def get_cuidador(db: Session, id_usuario: int):
-    return db.query(Cuidador).filter(Cuidador.usuario_id_usuario == id_usuario).first()
+
+def get_cuidador(db: Session, id_cuidador: int):
+    return db.query(Cuidador).filter(Cuidador.id_cuidador == id_cuidador).first()
 
 def get_cuidadores_disponibles(db: Session, lat: float, lng: float, radius: float,
     fecha_inicio: Optional[str] = None, fecha_fin: Optional[str] = None,

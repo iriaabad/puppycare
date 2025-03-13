@@ -35,4 +35,38 @@ padding-top: 5%;
         width: 60vh;
       }
        
-     
+      #contenedor {
+        display: flex;
+        gap: 10px;
+    }
+    
+    #map {
+        width: 70%;
+        height: 500px;
+    }
+    
+    #lista-cuidadores {
+        width: 30%;
+        overflow-y: auto;
+        max-height: 500px;
+    }
+    
+    .cuidador-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .marker-number {
+        background: rgb(3, 56, 25);
+        color: white;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    

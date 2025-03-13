@@ -27,7 +27,7 @@ def create_reserva(db: Session, reserva: ReservaCreate):
     ).scalar() or 0  # Si no hay reservas, devolver 0
 
     # Verificar si hay capacidad suficiente
-    if mascotas_reservadas + reserva.cantidad_mascotas > cuidador.capacidad:
+    if mascotas_reservadas + reserva.cantidad_mascotas > cuidador.capacidad_mascota:
         raise HTTPException(status_code=400, detail="El cuidador no tiene capacidad suficiente para esta reserva")
 
     # Crear la reserva si hay espacio disponible

@@ -33,7 +33,7 @@ def get_cuidadores_disponibles_endpoint(
     return get_cuidadores_disponibles(db, lat, lng, radius, fecha_inicio, fecha_fin, cantidad_mascotas)
 
 
-@router.get("/{id_cuidador}", response_model=CuidadorResponse)
+@router.get("/recibir/{id_cuidador}", response_model=CuidadorResponse)
 def obtener_cuidador(id_cuidador: int, db: Session = Depends(get_db)):
     cuidador = get_cuidador(db, id_cuidador)
     if not cuidador:

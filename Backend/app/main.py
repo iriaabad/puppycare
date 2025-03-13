@@ -5,7 +5,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user_auth, users, excepciones, cuidadores, mascotas, tamano, tipomascota, reservas, evento
+from routers import user_auth, users, excepciones, cuidadores, mascotas, tamano, tipomascota, reservas, evento, clientes
 
 
 
@@ -37,6 +37,8 @@ app.include_router(tipomascota.router)
 app.include_router(tamano.router)
 app.include_router(reservas.router)
 app.include_router(evento.router)
+app.include_router(clientes.router)
+
 
 
 
