@@ -19,8 +19,12 @@ class CuidadorCreate(CuidadorBase):
     descripcion: Optional[str]
     disponibilidad_activa: Optional[bool]
 
-class CuidadorUpdate(CuidadorBase):
-    pass  # Permite actualizar solo los campos enviados
+class CuidadorUpdate(BaseModel):
+    tarifa_dia: Optional[float] = None
+    capacidad_mascota: Optional[int] = None
+    descripcion: Optional[str] = None
+    disponibilidad_activa: Optional[bool] = None
+
 
 class CuidadorResponse(CuidadorBase):
     id_cuidador: int

@@ -2,6 +2,9 @@ body{
 padding-top: 5%;
 
 }
+main {
+  flex: 1; /* Permite que el main ocupe el espacio disponible */
+}
 
     /* Estilo para el formulario */
     form {

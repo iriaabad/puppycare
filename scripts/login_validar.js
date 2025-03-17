@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response.ok) {
                 alert("Usuario autenticado");
-                window.location.reload();
+                window.location.ancestorOrigins;
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.detail}`);

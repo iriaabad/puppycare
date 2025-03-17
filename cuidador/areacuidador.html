@@ -4,9 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Área cliente</title>
+  <title>Área cuidador</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/menuprincipalcliente.css">
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
 </head>
@@ -15,23 +14,23 @@
   <header>
     <div id="header-placeholder"></div>
     <div class="header-container">
-      <h1 id="saludo-cliente"></h1>
+      <h1 id="saludo"></h1>
     </div>
   </header>
   <!-- Formulario de login -->
   <div id="formulariologin" style="display: none;"></div>
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
 
-  <!-- Contenido si el cliente está autenticado -->
+  <!-- Contenido si el cuidador está autenticado -->
   <div id="areaprivada" class="areaprivada" style="display: none;">
-    <div class="opcionescliente">
-      <a href="perfil.html">Mis datos</a>
-      <a href="mascotas.html">Mis mascotas</a>
-      <a href="crearReserva.html">Hacer una reserva</a>
-      <a href="reservas.html">Ver mis reservas</a>
-      <a href="mensajes.html">Ver mis mensajes</a>
-    </div>
 
+    <div class="opciones">
+        <a href="perfil.html">Modificar datos personales</a>
+        <a href="opcionesReserva.html">Modificar opciones de reserva</a>
+        <a href="calendario.html">Ver o modificar calendario</a>
+        <a href="mensajes.html">Ver mis mensajes</a>
+      </div>
+  
     <!-- Imagen al otro lado -->
     <div class="image-container">
       <img src="img/perro.png" alt="Imagen simpática de perro">
@@ -45,7 +44,6 @@
   <!-- Enlace a los scripts externos -->
   <script src="//localhost/puppyCare/PuppyCare/scripts/headerdisplay.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
-  <script src="scripts/mostrarmenucliente.js"></script>
 
 
 </body>

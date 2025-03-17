@@ -8,99 +8,90 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!userData.id_usuario) throw new Error("Error: id_usuario no encontrado.");
 
         const id_usuario = userData.id_usuario;
-        cargarUsuario(id_usuario);
+        
+        // Obtener el id_cuidador asociado al usuario
+        const cuidadorResponse = await fetch(`http://127.0.0.1:8000/cuidadores/select/?usuario_id_usuario=${id_usuario}`);
+        if (!cuidadorResponse.ok) throw new Error("Error al obtener datos del cuidador");
+
+        const cuidadorData = await cuidadorResponse.json();
+
+        // Verificar si el array tiene datos
+        if (!Array.isArray(cuidadorData) || cuidadorData.length === 0) {
+            throw new Error("No se encontró un cuidador asociado a este usuario");
+        }
+
+        const id_cuidador = cuidadorData[0].id_cuidador; // Acceder al primer elemento del array
+        cargarDatosCuidador(id_cuidador);
+
+
+        // Manejo del botón de edición
+        document.getElementById("editar-btn").addEventListener("click", function () {
+            document.querySelectorAll("#cuidador-form input").forEach(input => input.removeAttribute("disabled"));
+            document.getElementById("guardar-btn").style.display = "inline-block";
+            document.getElementById("editar-btn").style.display = "none";
+        });
 
         // Manejo del envío del formulario
-        document.getElementById("formularioparte2").addEventListener("submit", async function (event) {
+        document.getElementById("cuidador-form").addEventListener("submit", async function (event) {
             event.preventDefault();
             const datosActualizados = {};
-
-            // Mapeo de campos
-            const campos = ["nombre", "apellido1", "apellido2", "emailuser", "calle", "numero", "piso", "codigopostal", "ciudad"];
+            
+            const campos = ["tarifa_dia", "capacidad_mascotas", "descripcion", "disponibilidad_activa"];
             campos.forEach(campo => {
                 const input = document.getElementById(campo);
-                if (input && input.value.trim()) datosActualizados[campo] = input.value.trim();
-            });
-
-            // Verificar si la dirección ha cambiado
-            const direccionModificada = ["calle", "numero", "codigopostal", "ciudad"].some(campo => {
-                return document.getElementById(campo).value.trim() !== document.getElementById(campo).getAttribute(`data-original-${campo}`);
-            });
-
-            if (direccionModificada) {
-                const direccionCompleta = `${datosActualizados.calle} ${datosActualizados.numero} ${datosActualizados.codigopostal} ${datosActualizados.ciudad}`;
-                const coordenadas = await obtenerCoordenadas(direccionCompleta);
-                if (coordenadas) {
-                    datosActualizados.latitud = coordenadas.lat;
-                    datosActualizados.longitud = coordenadas.lon;
-                } else {
-                    console.error("No se pudieron obtener las coordenadas");
+                if (input) {
+                    if (input.type === "checkbox") {
+                        datosActualizados[campo] = input.checked;
+                    } else {
+                        datosActualizados[campo] = input.value.trim();
+                    }
                 }
+            });
+            if (datosActualizados["descripcion_cuidador"] !== undefined) {
+                datosActualizados["descripcion"] = datosActualizados["descripcion_cuidador"];
+                delete datosActualizados["descripcion_cuidador"];
             }
 
             if (Object.keys(datosActualizados).length > 0) {
-                await actualizarUsuario(id_usuario, datosActualizados);
+                await actualizarCuidador(id_cuidador, datosActualizados);
             }
         });
 
     } catch (error) {
-        console.error("Error de autenticación o carga de usuario:", error);
+        console.error("Error de autenticación o carga de datos del cuidador:", error);
     }
 });
 
-// Obtener coordenadas a partir de una dirección usando Nominatim
-async function obtenerCoordenadas(direccion) {
+// Cargar datos del cuidador en el formulario
+async function cargarDatosCuidador(id_cuidador) {
     try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`);
-        if (!response.ok) throw new Error("Error al obtener coordenadas");
-
+        const response = await fetch(`http://127.0.0.1:8000/cuidadores/recibir/${id_cuidador}`);
+        if (!response.ok) throw new Error(`Error al obtener datos del cuidador: ${response.status}`);
+        
         const data = await response.json();
-        return data.length > 0 ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) } : null;
+        document.getElementById("tarifa_dia").value = data.tarifa_dia ?? "";
+        document.getElementById("capacidad_mascotas").value = data.capacidad_mascota ?? "";
+        document.getElementById("descripcion").value = data.descripcion ?? "";
+        document.getElementById("disponibilidad_activa").checked = data.disponibilidad_activa ?? false;
     } catch (error) {
-        console.error("Error al obtener coordenadas:", error);
-        return null;
+        console.error("Error al cargar datos del cuidador:", error);
     }
 }
 
-// Cargar datos del usuario en el formulario
-async function cargarUsuario(id_usuario) {
+// Actualizar datos del cuidador
+async function actualizarCuidador(id_cuidador, datos) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/users/user/${id_usuario}`);
-        if (!response.ok) throw new Error(`Error al obtener usuario: ${response.status}`);
-
-        const data = await response.json();
-        const mapping = { nombre: "nombre", apellido1: "apellido1", apellido2: "apellido2", emailuser: "email", calle: "calle", numero: "numero", piso: "piso", codigopostal: "codigopostal", ciudad: "ciudad" };
-
-        Object.keys(mapping).forEach(campo => {
-            const input = document.getElementById(campo);
-            if (input) {
-                input.value = data[mapping[campo]] ?? "";
-                if (["calle", "numero", "codigopostal", "ciudad"].includes(campo)) {
-                    input.setAttribute(`data-original-${campo}`, input.value);
-                }
-            }
-        });
-
-    } catch (error) {
-        console.error("Error al cargar usuario:", error);
-    }
-}
-
-// Actualizar datos del usuario
-async function actualizarUsuario(id_usuario, datos) {
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/users/user/${id_usuario}`, {
+        const response = await fetch(`http://127.0.0.1:8000/cuidadores/modificar/${id_cuidador}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
         });
 
-        if (!response.ok) throw new Error(`Error al actualizar usuario: ${response.status}`);
-
-        console.log("Usuario actualizado correctamente");
+        if (!response.ok) throw new Error(`Error al actualizar cuidador: ${response.status}`);
+        console.log("Datos del cuidador actualizados correctamente");
         alert("Datos actualizados con éxito");
-
+        location.reload();
     } catch (error) {
-        console.error("Error al actualizar usuario:", error);
+        console.error("Error al actualizar datos del cuidador:", error);
     }
 }

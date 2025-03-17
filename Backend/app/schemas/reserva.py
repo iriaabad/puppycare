@@ -16,8 +16,8 @@ class ReservaCreate(ReservaBase):
 class ReservaUpdate(ReservaBase):
     pass
 
-class Reserva(ReservaBase):
+class ReservaResponse(ReservaBase):
     id_reserva: int
 
     class Config:
-        from_attributes = True
+        from_attributes = True  

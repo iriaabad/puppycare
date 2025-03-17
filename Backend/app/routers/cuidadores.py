@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from db.client import get_db
 from typing import List, Optional
-from db.models.models import Cuidador 
+from db.models.models import Cuidador, Calendario
 from schemas.cuidador import CuidadorCreate, CuidadorUpdate, CuidadorResponse
 from db.cruds.cuidador import get_cuidador, get_cuidadores, create_cuidador, update_cuidador, delete_cuidador, get_cuidadores_disponibles
 
@@ -40,11 +40,25 @@ def obtener_cuidador(id_cuidador: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Cuidador no encontrado")
     return cuidador
 
+@router.get("/user/{id_user}", response_model=CuidadorResponse)
+def obtener_cuidador(id_user: int, db: Session = Depends(get_db)):
+    cuidador = get_cuidador(db, id_user)
+    if not cuidador:
+        raise HTTPException(status_code=404, detail="Cuidador no encontrado")
+    return cuidador
+
 @router.post("/", response_model=CuidadorResponse)
 def crear_cuidador(cuidador: CuidadorCreate, db: Session = Depends(get_db)):
-    return create_cuidador(db, cuidador)
+    nuevo_cuidador = create_cuidador(db, cuidador)
 
-@router.put("/{id_cuidador}", response_model=CuidadorResponse)
+    # Crear una entrada en la tabla calendario para el nuevo cuidador
+    nuevo_calendario = Calendario(cuidador_id_cuidador=nuevo_cuidador.id_cuidador)
+    db.add(nuevo_calendario)
+    db.commit()
+    db.refresh(nuevo_calendario)
+
+    return nuevo_cuidador
+@router.put("/modificar/{id_cuidador}", response_model=CuidadorResponse)
 def actualizar_cuidador(id_cuidador: int, cuidador: CuidadorUpdate, db: Session = Depends(get_db)):
     cuidador_actualizado = update_cuidador(db, id_cuidador, cuidador)
     if not cuidador_actualizado:

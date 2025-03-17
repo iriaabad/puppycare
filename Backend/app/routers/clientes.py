@@ -51,12 +51,12 @@ def crear_cliente(cliente: ClienteCreate, db: Session = Depends(get_db)):
 def actualizar_cliente(id_cliente: int, cliente: ClienteUpdate, db: Session = Depends(get_db)):
     cliente_actualizado = update_cliente(db, id_cliente, cliente)
     if not cliente_actualizado:
-        raise HTTPException(status_code=404, detail="Cuidador no encontrado")
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
     return cliente_actualizado
 
 @router.delete("/{id_cliente}")
 def eliminar_cliente(id_cliente: int, db: Session = Depends(get_db)):
     cliente_eliminado = delete_cliente(db, id_cliente)
     if not cliente_eliminado:
-        raise HTTPException(status_code=404, detail="Cuidador no encontrado")
-    return {"message": "Cuidador eliminado correctamente"}
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    return {"message": "Cliente eliminado correctamente"}

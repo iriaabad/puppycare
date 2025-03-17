@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones de reserva</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menucuidador.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="calendario.css">
+</head>
+
+<body>
+    <header>
+        <div id="menucuidador-placeholder"></div>
+    </header>
+    <main>
+        <!-- Formulario de login -->
+        <div id="formulariologin" style="display: none;"></div>
+        <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+
+        <!-- Contenido si el cuidador está autenticado -->
+        <div id="areaprivada" class="areaprivada" style="display: none;">
+            <br>
+            <br>
+            <h2>Calendario de Eventos</h2>
+
+            <div id="calendar"></div>
+
+            <h3>Próximos Eventos</h3>
+            <div id="event-list"></div>
+
+            <!-- Botón para añadir un nuevo evento o bloqueo -->
+            <button class="add-event-btn" id="add-event-btn">Añadir Evento/Bloqueo</button>
+
+            <!-- Formulario para agregar eventos -->
+            <div class="event-form" id="event-form">
+                <h3>Nuevo Evento/Bloqueo</h3>
+                <form id="event-form-content">
+                    <label for="event-title">Título:</label>
+                    <input type="text" id="event-title" name="title" required>
+
+                    <label for="event-start">Fecha de Inicio:</label>
+                    <input type="datetime-local" id="event-start" name="start" required>
+
+                    <label for="event-end">Fecha de Fin:</label>
+                    <input type="datetime-local" id="event-end" name="end" required>
+
+                    <label for="event-description">Descripción:</label>
+                    <textarea id="event-description" name="description"></textarea>
+
+                    <button type="submit">Guardar Evento</button>
+                </form>
+            </div>
+
+
+        </div>
+        <div id="footer-placeholder"></div>
+
+        <!-- Enlace a los scripts externos -->
+        <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
+        <script src="scripts/mostrarmenucuidador.js"></script>
+        <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+        <script src="scripts/eventos_cuidador.js"></script>
+
+
+
+
+
+
+    </main>
+</body>
+
+</html>

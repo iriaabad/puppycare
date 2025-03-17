@@ -52,8 +52,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const userLat = map.getCenter().lat;
                     const userLng = map.getCenter().lng;
 
+                     // Filtrar cuidadores con disponibilidad activa en 1
+                    const cuidadoresDisponibles = cuidadores.filter(cuidador => cuidador.disponibilidad_activa === true);
+
                     // Calcular la distancia de cada cuidador y ordenar
-                    cuidadores.forEach(cuidador => {
+                    cuidadoresDisponibles.forEach(cuidador => {
                         if (cuidador.usuario && cuidador.usuario.latitud && cuidador.usuario.longitud) {
                             cuidador.distancia = calcularDistancia(userLat, userLng, cuidador.usuario.latitud, cuidador.usuario.longitud);
                         } else {
@@ -62,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     });
 
                     // Ordenar de menor a mayor distancia
-                    cuidadores.sort((a, b) => a.distancia - b.distancia);
+                    cuidadoresDisponibles.sort((a, b) => a.distancia - b.distancia);
 
                     // Limpiar lista y marcadores previos
                     document.getElementById("lista-cuidadores").innerHTML = "";
@@ -70,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     markers = [];
 
                     // Agregar cuidadores ordenados a la lista y al mapa
-                    cuidadores.forEach((cuidador, index) => {
+                    cuidadoresDisponibles.forEach((cuidador, index) => {
                         if (cuidador.usuario && cuidador.usuario.latitud && cuidador.usuario.longitud) {
                             const lat = cuidador.usuario.latitud;
                             const lon = cuidador.usuario.longitud;
@@ -102,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     });
 
                     // Asignar eventos a los botones
-                    asignarEventosSeleccion(cuidadores);
+                    asignarEventosSeleccion(cuidadoresDisponibles);
                 })
                 .catch(err => console.error("Error al cargar cuidadores:", err));
         }

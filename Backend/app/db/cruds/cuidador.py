@@ -27,7 +27,7 @@ def create_cuidador(db: Session, cuidador: CuidadorCreate):
     return db_cuidador
 
 def update_cuidador(db: Session, id_cuidador: int, cuidador: CuidadorUpdate):
-    db_cuidador = db.query(Cuidador).filter(Cuidador.usuario_id_usuario == id_cuidador).first()
+    db_cuidador = db.query(Cuidador).filter(Cuidador.id_cuidador == id_cuidador).first()
     if not db_cuidador:
         return None
 

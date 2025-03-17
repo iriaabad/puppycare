@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (isLoggedIn) {
     const isCuidador = await checkIfCuidadorExists(id_usuario);
     if (isCuidador) {
-      window.location.href = "areacuidador.html";
+      window.location.href = "//localhost/puppyCare/PuppyCare/cuidador/areacuidador.html";
       return; // Salir del flujo para que no se ejecute el resto del código
     }
   }

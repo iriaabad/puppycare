@@ -2,7 +2,6 @@ from sqlalchemy import Boolean, Column, Integer, String, DECIMAL, ForeignKey, Fl
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-
 Base = declarative_base()
 
 # Definimos la clase Usuario (User)
@@ -110,7 +109,7 @@ class Reserva(Base):
     cliente = relationship("Cliente", back_populates="reservas")
     cuidador = relationship("Cuidador", back_populates="reservas")
     estado_reserva = relationship("EstadoReserva", back_populates="reservas")
-    calendario = relationship("Calendario", back_populates="reserva")  
+    eventos = relationship("EventoCalendario", back_populates="reserva")
     
 # Definimos la clase EstadoReserva
 class EstadoReserva(Base):
@@ -127,21 +126,33 @@ class Calendario(Base):
 
     id_calendario = Column(Integer, primary_key=True, index=True, autoincrement=True)
     cuidador_id_cuidador = Column(Integer, ForeignKey("cuidador.id_cuidador"), nullable=False)
+   
+    # Relaciones
+    cuidador = relationship("Cuidador", back_populates="calendario")
+    eventos = relationship("EventoCalendario", back_populates="calendario")
+
+
+class EventoCalendario(Base):
+    __tablename__ = "evento_calendario"
+
+    id_evento = Column(Integer, primary_key=True, index=True)
+    calendario_id = Column(Integer, ForeignKey("calendario.id_calendario"), nullable=False)
     reserva_id_reserva = Column(Integer, ForeignKey("reserva.id_reserva"), nullable=True)
     fecha_inicio = Column(DateTime, nullable=False)
     fecha_fin = Column(DateTime, nullable=False)
-    evento_id_evento = Column(Integer, ForeignKey("evento.id_evento"), nullable=False)
+    evento_id_evento = Column(Integer, ForeignKey("tipo_evento.id_evento"), nullable=False)  # 🔹 FIXED
 
-    cuidador = relationship("Cuidador", back_populates="calendario", uselist=False)
-    reserva = relationship("Reserva", back_populates="calendario")
-    evento = relationship("Evento", back_populates="calendario")
+    # Relaciones
+    calendario = relationship("Calendario", back_populates="eventos")
+    reserva = relationship("Reserva", back_populates="eventos")  # 🔹 FIXED
+    evento = relationship("TipoEvento")  # Relación con el tipo de evento
+
+
  
  # Definimos la clase Evento
-class Evento(Base):
-    __tablename__ = "evento"
+class TipoEvento(Base):
+    __tablename__ = "tipo_evento"
 
     id_evento = Column(Integer, primary_key=True, autoincrement=True, index=True)
     descripcion = Column(String(50), nullable=False)
-    #relacion con calendario
-    calendario = relationship("Calendario", back_populates="evento")
-
+  
