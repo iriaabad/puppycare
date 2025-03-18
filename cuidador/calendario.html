@@ -38,18 +38,16 @@
             <div class="event-form" id="event-form">
                 <h3>Nuevo Evento/Bloqueo</h3>
                 <form id="event-form-content">
-                    <label for="event-title">Título:</label>
-                    <input type="text" id="event-title" name="title" required>
-
                     <label for="event-start">Fecha de Inicio:</label>
                     <input type="datetime-local" id="event-start" name="start" required>
 
                     <label for="event-end">Fecha de Fin:</label>
                     <input type="datetime-local" id="event-end" name="end" required>
 
-                    <label for="event-description">Descripción:</label>
-                    <textarea id="event-description" name="description"></textarea>
-
+                    <label for="event-tipo_evento">Tipo:</label>
+                    <select id="event-tipo_evento" name="tipo_evento_id_tipo_evento" required>
+                        <option value="">Seleccione...</option>
+                      </select><br>
                     <button type="submit">Guardar Evento</button>
                 </form>
             </div>

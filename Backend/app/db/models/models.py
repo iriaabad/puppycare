@@ -129,7 +129,7 @@ class Calendario(Base):
    
     # Relaciones
     cuidador = relationship("Cuidador", back_populates="calendario")
-    eventos = relationship("EventoCalendario", back_populates="calendario")
+    eventos_calendario = relationship("EventoCalendario", back_populates="calendario")
 
 
 class EventoCalendario(Base):
@@ -140,12 +140,12 @@ class EventoCalendario(Base):
     reserva_id_reserva = Column(Integer, ForeignKey("reserva.id_reserva"), nullable=True)
     fecha_inicio = Column(DateTime, nullable=False)
     fecha_fin = Column(DateTime, nullable=False)
-    evento_id_evento = Column(Integer, ForeignKey("tipo_evento.id_evento"), nullable=False)  # 🔹 FIXED
+    evento_id_evento = Column(Integer, ForeignKey("tipo_evento.id_tipo_evento"), nullable=False)  
 
     # Relaciones
-    calendario = relationship("Calendario", back_populates="eventos")
-    reserva = relationship("Reserva", back_populates="eventos")  # 🔹 FIXED
-    evento = relationship("TipoEvento")  # Relación con el tipo de evento
+    calendario = relationship("Calendario", back_populates="eventos_calendario")
+    reserva = relationship("Reserva", back_populates="eventos") 
+    tipo_evento = relationship("TipoEvento", back_populates="eventos_calendario")
 
 
  
@@ -153,6 +153,8 @@ class EventoCalendario(Base):
 class TipoEvento(Base):
     __tablename__ = "tipo_evento"
 
-    id_evento = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    id_tipo_evento = Column(Integer, primary_key=True, autoincrement=True, index=True)
     descripcion = Column(String(50), nullable=False)
-  
+     
+    # Relaciones
+    eventos_calendario = relationship("EventoCalendario", back_populates="tipo_evento")  # Relación con EventoCalendario

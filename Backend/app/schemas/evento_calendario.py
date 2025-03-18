@@ -8,11 +8,8 @@ class EventoCalendarioBase(BaseModel):
     reserva_id_reserva: Optional[int] = None
     fecha_inicio: datetime
     fecha_fin: datetime
-    evento_id_evento: int
-    evento: Optional[TipoEventoBase]
-                     
-    class Config:
-        from_attributes = True
+    evento_id_evento: int                     
+
 
 
 class EventoCalendarioCreate(EventoCalendarioBase):
@@ -23,6 +20,12 @@ class EventoCalendarioUpdate(EventoCalendarioBase):
 
 class EventoCalendarioResponse(EventoCalendarioBase):
     id_evento: int
+    calendario_id: int
+    reserva_id_reserva: Optional[int] = None
+    fecha_inicio: datetime
+    fecha_fin: datetime
+    evento_id_evento: int
+    #descripcion: Optional[TipoEventoBase]
 
     class Config:
         from_attributes = True
