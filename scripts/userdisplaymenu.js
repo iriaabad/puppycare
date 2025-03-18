@@ -27,7 +27,7 @@ function mostrarPerfil(user) {
                 <img src="//localhost/puppyCare/PuppyCare/img/default-avatar.png" alt="Avatar">
                 <span>${user.nombre}</span>
             </a>
-            <a href="//localhost/puppyCare/PuppyCare/logout" class="logout-button">Cerrar sesión</a>
+            <a href="" id="logout-btn" class="logout-button">Cerrar sesión</a>
         </div>
     `;
 }

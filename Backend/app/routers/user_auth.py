@@ -1,10 +1,8 @@
-import email
-import re
 from urllib import response
 from fastapi import APIRouter, Depends, HTTPException, status, FastAPI, Response, Cookie, Request
 from typing import Annotated
-from fastapi import responses
 import jwt
+import uuid
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt import PyJWK, PyJWKError, decode,encode
@@ -21,6 +19,8 @@ from db.cruds.user import buscar_usuario_en_bd_por_email
 from db.client import SessionLocal, get_db
 from .excepciones import auth_exception
 from fastapi.responses import  JSONResponse
+from fastapi.security import OAuth2PasswordBearer
+
 
 
 
@@ -33,6 +33,8 @@ router = APIRouter(prefix="/auth",
                    responses={status.HTTP_404_NOT_FOUND: {"message": "No encontrado"}})
 
 oauth2 = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 
 
 
@@ -65,7 +67,8 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
         expiracion_fecha = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRACION_MINUTOS)
         payload = {
         "sub": user.email,  # 'sub' es un campo estándar que identifica al sujeto (usuario)
-        "exp": expiracion_fecha  # Fecha de expiración del token
+        "exp": expiracion_fecha,  # Fecha de expiración del token
+        "jti": str(uuid.uuid4())  # Generar un identificador único para el tokenx
         }
 
 
@@ -164,15 +167,47 @@ async def read_users_me(request: Request, db: Session = Depends(get_db)):
     }
 
 
-
-
 def verificar_token(token: str):
     try:
         payload = jwt.decode(token, SECRET, algorithms=[ALGORITHM])
+        jti = payload.get("jti")
+
+        # Verificar si el token está en la lista negra
+        if jti in blacklist:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token revocado. Inicia sesión nuevamente.",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
         return payload
+
     except InvalidTokenError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token inválido o expirado",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+# Simulación de una lista negra en memoria (para producción, usa una base de datos o cache)
+blacklist = set()
+
+@router.post("/logout")
+def logout(response: Response, token: str = Cookie(None, alias="access_token")):
+    if not token:
+        raise HTTPException(status_code=401, detail="No se encontró token en la cookie")
+    
+    try:
+        payload = jwt.decode(token, SECRET, algorithms=["HS256"])
+        print(payload)  # Debug: imprime el contenido del token
+        jti = payload.get("jti")
+        if not jti:
+            raise HTTPException(status_code=400, detail="Token no válido: jti no encontrado")
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="El token ha expirado")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=400, detail="Token no válido")
+    
+    blacklist.add(jti)
+    response.delete_cookie("access_token")
+    return {"message": "Sesión cerrada, token revocado"}
+
