@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Área cuidador</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
+  <!-- <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script> -->
+  <!-- <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script> -->
+  <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
 </head>
 
 <body>
@@ -17,28 +18,33 @@
       <h1 id="saludo"></h1>
     </div>
   </header>
-  <!-- Formulario de login -->
-  <div id="formulariologin" style="display: none;"></div>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+  <main class="site-body">
+    <!-- Contenedor de la pantalla de carga -->
+    <div id="loading-screen" style="display: none;">
+      <p>Cargando...</p>
+    </div>
 
-  <!-- Contenido si el cuidador está autenticado -->
-  <div id="areaprivada" class="areaprivada" style="display: none;">
+    <!-- Formulario de login -->
+    <div id="formulariologin" style="display: none;"></div>
+    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
 
-    <div class="opciones">
+    <!-- Contenido si el cuidador está autenticado -->
+    <div id="areaprivada" class="areaprivada" style="display: none;">
+
+      <div class="opciones">
         <a href="perfil.html">Modificar datos personales</a>
         <a href="opcionesReserva.html">Modificar opciones de reserva</a>
         <a href="calendario.html">Ver o modificar calendario</a>
         <a href="mensajes.html">Ver mis mensajes</a>
       </div>
-  
-    <!-- Imagen al otro lado -->
-    <div class="image-container">
-      <img src="img/perro.png" alt="Imagen simpática de perro">
+
+      <!-- Imagen al otro lado -->
+      <div class="image-container">
+        <img src="img/perro.png" alt="Imagen simpática de perro">
+      </div>
     </div>
-  </div>
-
-
-  </div>
+    </div>
+  </main>
   <div id="footer-placeholder"></div>
 
   <!-- Enlace a los scripts externos -->

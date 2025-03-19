@@ -3,8 +3,9 @@
   /* Estilos generales para la barra de navegación */
 .navbar-general {
     display: flex;
-    justify-content: space-between;
-    align-items: left;
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    align-items: center;
+   /*align-items: left;*/
     background: rgba(255, 255, 255, 0.8); /* Fondo translúcido */
     backdrop-filter: blur(10px); /* Efecto difuminado */
     padding: 15px 30px;
@@ -13,7 +14,10 @@
     top: 0;
     width: 100%;
     z-index: 1000;
+    display: flex;
+    gap: clamp(20px, 60vw, 70vw);
 }
+
 
 /* Contenedor de los enlaces */
 .navbar-links {
@@ -23,6 +27,7 @@
 
 /* Estilos de los enlaces */
 .navbar-links a {
+    display: flex;
     text-decoration: none;
     font-size: 1.2rem;
     color: #555;
@@ -37,12 +42,26 @@
     color: white;
 }
 
+.user-profile a {
+    gap: 10px;
+    /* margin: left 10%; Mueve el contenedor de usuario a la izquierda */
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #555;
+    padding: 10px 15px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
         padding: 10px;
         position: relative;
+        gap: clamp(20px, 20vw, 40vw);
+
 
     }
 

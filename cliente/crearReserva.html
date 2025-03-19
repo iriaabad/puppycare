@@ -1,60 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Reserva</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/menucliente.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" >
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
 </head>
-
 <body>
-
   <body>
     <header>
       <div id="menucliente-placeholder"></div>
     </header>
-    <!-- Formulario de login -->
-    <div id="formulariologin" style="display: none;"></div>
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-
-    <!-- Contenido si el cliente está autenticado -->
-    <div id="areaprivada" class="areaprivada" style="display: none;">
-      <h1>Crear Reserva</h1>
-      <form id="reserva-form">
-        <!-- Campos del formulario de reserva -->
-         <h2>Búsqueda de cuidadores</h2>
-         <p>Añade las fechas de la reserva para iniciar la búsqueda</p>
-        <input type="date" name="fecha_inicio" required value="2025-03-05"/>
-        <input type="date" name="fecha_fin" required value="2025-03-15"/>
-        <input type="number" name="cantidad_mascotas" placeholder="Cantidad de Mascotas" required value="2" />
-        <button type="button" id="buscar-btn">Buscar</button>
-      </form>
-
-      <h2>Cuidadores Disponibles</h2>
-      <div id="contenedor">
-        <div id="map"></div>
-        <div id="lista-cuidadores"></div>
-        <div id="detalles-reserva"></div>
-
-    </div>
-
-
-    </div>
-    </div>
+    <main class="site-body">
+      <!-- Formulario de login -->
+      <div id="formulariologin" style="display: none;"></div>
+      <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+      <!-- Contenido si el cliente está autenticado -->
+      <div id="areaprivada" class="areaprivada" style="display: none;">
+        <h1>Crear Reserva</h1>
+        <form id="reserva-form">
+          <!-- Campos del formulario de reserva -->
+          <h2>Búsqueda de cuidadores</h2>
+          <p>Añade las fechas de la reserva para iniciar la búsqueda</p>
+          <input type="date" name="fecha_inicio" required value="2025-03-05" />
+          <input type="date" name="fecha_fin" required value="2025-03-15" />
+          <input type="number" name="cantidad_mascotas" placeholder="Cantidad de Mascotas" required value="2" />
+          <button type="button" id="buscar-btn">Buscar</button>
+        </form>
+        <h2>Cuidadores Disponibles</h2>
+        <div id="contenedor">
+          <div id="map"></div>
+          <div id="lista-cuidadores"></div>
+          <div id="detalles-reserva"></div>
+        </div>
+      </div>
+      </div>
+    </main>
     <div id="footer-placeholder"></div>
-
     <!-- Enlace a los scripts externos -->
     <script src="scripts/localizador_reserva.js"></script>
     <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
     <script src="scripts/mostrarmenucliente.js"></script>
-
   </body>
-
 </html>
-

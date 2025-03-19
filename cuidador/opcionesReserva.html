@@ -10,35 +10,37 @@
 </head>
 
 <body>
-    <header>
-      <div id="menucuidador-placeholder"></div>
-    </header>
+  <header>
+    <div id="menucuidador-placeholder"></div>
+  </header>
+  <main class="site-body">
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
     <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-  
+
     <!-- Contenido si el cuidador está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
       <h2>Opciones de reserva</h2>
       <form id="cuidador-form">
-          <label for="tarifa_dia">Taria por día:</label>
-          <input type="number" id="tarifa_dia"  disabled><br>
-  
-          <label for="capacidad_mascotas">Número de mascotas que puedes alojar:</label>
-          <input type="text" id="capacidad_mascotas" disabled><br>
-  
-          <label for="descripcion">Cuénta algo sobre tí:</label>
-          <input type="text" id="descripcion" disabled><br>
-  
-          <label for="disponibilidad_activa">Estoy disponible para reservas</label>
-          <input type="checkbox" id="disponibilidad_activa" disabled><br>
-  
-          <button type="button" id="editar-btn">Editar</button>
-          <button type="submit" id="guardar-btn" style="display:none;">Guardar</button>
+        <label for="tarifa_dia">Taria por día:</label>
+        <input type="number" id="tarifa_dia" disabled><br>
+
+        <label for="capacidad_mascotas">Número de mascotas que puedes alojar:</label>
+        <input type="text" id="capacidad_mascotas" disabled><br>
+
+        <label for="descripcion">Cuénta algo sobre tí:</label>
+        <input type="text" id="descripcion" disabled><br>
+
+        <label for="disponibilidad_activa">Estoy disponible para reservas</label>
+        <input type="checkbox" id="disponibilidad_activa" disabled><br>
+
+        <button type="button" id="editar-btn">Editar</button>
+        <button type="submit" id="guardar-btn" style="display:none;">Guardar</button>
       </form>
 
 
-  </div>
+    </div>
+  </main>
   <div id="footer-placeholder"></div>
 
   <!-- Enlace a los scripts externos -->
@@ -46,5 +48,3 @@
   <script src="scripts/mostrarmenucuidador.js"></script>
   <script src="scripts/cuidador_actualizardatos.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
-
-

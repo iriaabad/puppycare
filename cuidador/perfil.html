@@ -11,19 +11,20 @@
 </head>
 
 <body>
-    <header>
-      <div id="menucuidador-placeholder"></div>
-    </header>
+  <header>
+    <div id="menucuidador-placeholder"></div>
+  </header>
+  <main class="site-body">
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
     <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-  
+
     <!-- Contenido si el cuidador está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
-        <h2>Información del Usuario</h2>
-    <form id="user-form">
+      <h2>Información del Usuario</h2>
+      <form id="user-form">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre"  disabled><br>
+        <input type="text" id="nombre" disabled><br>
 
         <label for="apellido1">Primer apellido:</label>
         <input type="text" id="apellido1" disabled><br>
@@ -32,7 +33,7 @@
         <input type="text" id="apellido2" disabled><br>
 
         <label for="emailuser">Email:</label>
-        <input type="email" id="emailuser" disabled  suggested:"email"><br>
+        <input type="email" id="emailuser" disabled suggested:"email"><br>
 
         <h3>Dirección</h3>
         <label for="calle">Calle:</label>
@@ -48,11 +49,10 @@
 
         <button type="button" id="editar-btn">Editar</button>
         <button type="submit" id="guardar-btn" style="display:none;">Guardar</button>
-    </form>
-    </div>  
-
-
-  </div>
+      </form>
+    </div>
+    </div>
+  </main>
   <div id="footer-placeholder"></div>
 
   <!-- Enlace a los scripts externos -->
@@ -61,5 +61,3 @@
   <script src="/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
   <script src="//localhost/puppyCare/PuppyCare/scripts/actualizar_datoUsuario.js"></script>
-
-

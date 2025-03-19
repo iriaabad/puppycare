@@ -31,140 +31,102 @@ body {
   flex: 1; /* Permite que el main ocupe el espacio disponible */
 }
 
-/*Formarto oferta de iniciar sesión*/
-.ofertalogin{
-  font-size: 0.8em; 
-  color: grey;
-}
-.ofertalogin a{
-  font-size: 1.2em; 
-  font-weight: bold;
-  color: darkgrey;
-  text-decoration:none;
-}
 
-.ofertalogin a:hover{
-  color: darkkhaki;
-  font-size: 1.5em; 
-  transition: 3ms;
-  text-decoration: underline;
+
+/* test */
+/* Importar la fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
+
+/* Tipografía general para el cuerpo */
+body {
+    font-family: 'Roboto', sans-serif; /* Fuente base */
+    background-color: #f4f7fb; /* Color de fondo suave */
+    color: #333; /* Color del texto principal */
+    line-height: 1.6; /* Mejora la legibilidad */
+    margin: 0;
+    padding: 0;
 }
 
+/* Estilo para los encabezados (títulos) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Fuente para los títulos */
+    color: #333; /* Color oscuro para los títulos */
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Estilo para los párrafos */
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #666; /* Color gris suave para párrafos */
+    margin-bottom: 20px;
+}
 
 
-.contenedor-main {
+/* Botones */
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: #8eaccc;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Reseteo básico de márgenes y padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales para el body */
+body {
+  font-family: 'Roboto', sans-serif; /* Fuente de la página */
+  background-color: #f4f7fb; /* Color de fondo suave */
+  color: #333;
   display: flex;
-  justify-content: space-between; /* Espaciado entre columnas */
-  gap: 20px; /* Espacio entre los elementos */
-  padding: 5px;
+  flex-direction: column; /* Organiza los elementos verticalmente */
+  min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
 }
 
-.crearcuenta, .resenas {
-  flex: 1; /* Ambas columnas toman el mismo espacio */
+/* Estilos para el header */
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
-/* Asegurar que el contenido no sea demasiado ancho */
-.crearcuenta {
-  max-width: 49%;
+/* Estilo de la barra de navegación dentro del header */
+.navbar-general {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.8);
 }
 
-.resenas {
-  max-width: 49%;
+/* Estilos para el cuerpo */
+.site-body {
+  flex: 1; /* Permite que el body ocupe el espacio disponible */
+  padding: 20px;
+  overflow: hidden; /* Evita que el contenido desborde */
 }
 
-
-
-/* Formato de reseñas en el index*/
-
-.carousel-container {
-    width: auto;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Evita que los elementos salten de línea */
-  }
-
-  .carousel-resena {
-      display: flex; /* Alinea los elementos en una fila*/
-      transition: transform 0.8s ease-in-out; 
-  }
-  
-  .cardResena {
-      flex: 0 0 90%; /* Cada tarjeta ocupa el 100% del contenedor */
-      transition: 0.3s;
-      border: 1px solid #ddd;
-      padding: 5%;
-      background: white;
-      text-align: center;
-      border-radius: 10px;
-  }
-  .cardResena:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .cardResena img {
-    flex: inherit;
-    height: 10px;
-    width: 10px;
-    margin-right: 20px; /* Espacio entre la imagen y el texto */
-  }
-
-  .puntuacionestrellas i {
-    color: gold;
-    font-size: 1.2em;
-    margin-right: 2px;
-  }
-
-/* Formato formulario inicio sesión*/
-
-.form-login{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;  
-  padding: 3%;
-
+/* Estilos para el footer */
+.site-footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; /* Asegura que el footer se mantenga al final */
 }
-
-
-/* Formato formulario crear cuenta*/
-
-.form-cuenta{
-  margin-left: 7%;
-
-}
-
-  .form-group {
-    margin-bottom: 5px;
-}
-
-.form-box {
-    width: 70%;
-    padding: 12px 10px 12px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.form-box:focus {
-    outline: none;
-    border-color: #3b82f6;
-}
-
-.label {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #aaa;
-    pointer-events: none;
-    transition: 0.3s ease;
-}
-
-.form-box:focus + .label,
-.form-box:not(:placeholder-shown) + .label {
-    top: 0;
-    font-size: 12px;
-    color: #3b82f6;}

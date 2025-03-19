@@ -3,7 +3,5 @@ footer {
     color: white; /* Color del texto del footer */
     text-align: center; /* Centra el texto */
     padding: 10px 0; /* Espaciado interno */
-    bottom: 0;
     width: 100%;
-    position: fixed;
 }
