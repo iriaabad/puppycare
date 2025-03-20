@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const formContainer = document.getElementById("formulariologin"); // Donde se inyecta el formulario
 
     formContainer.addEventListener('submit', async (event) => {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Convertir los datos del FormData a un string codificado en URL
         const data = new URLSearchParams();
-        data.append("username", formData.get('email'));  
+        data.append("username", formData.get('email'));
         data.append("password", formData.get('password'));
 
         try {
@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (response.ok) {
                 alert("Usuario autenticado");
-                window.location.ancestorOrigins;
+                const prevPage = sessionStorage.getItem("prevPage") || "//localhost/puppyCare/PuppyCare/index.html";
+                window.location.href = prevPage; // Redirige a la página anterior o al inicio
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.detail}`);

@@ -34,8 +34,13 @@ function mostrarPerfil(user) {
 
 function mostrarBotonLogin() {
     document.getElementById("user-container").innerHTML = `
-        <button onclick="window.location.href='//localhost/puppyCare/PuppyCare/login.html'" class="login-button">Iniciar sesión</button>
+        <button onclick="guardarYRedirigir()" class="login-button">Iniciar sesión</button>
     `;
+}
+
+function guardarYRedirigir() {
+    sessionStorage.setItem("prevPage", window.location.href); // Guarda la página actual
+    window.location.href = "//localhost/puppyCare/PuppyCare/login.html"; // Redirige al login
 }
 
 
