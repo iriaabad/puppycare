@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (response.ok) {
                 // Limpia los datos de sesión en el cliente, si es necesario
                 localStorage.removeItem("access_token");
-                window.location.href = "/puppyCare/PuppyCare/index.html";
+                window.location.href = "//localhost/puppyCare/PuppyCare/index.html";
             } else {
                 console.error("Error al cerrar la sesión.");
             }
