@@ -6,7 +6,7 @@
     .then(response => {
         if (response.status === 200) {
             // Usuario autenticado: redirige a la página de área de cliente.
-            window.location.href = "//localhost/puppyCare/PuppyCare/cliente/areacliente.html";
+            window.location.href = "/puppyCare/PuppyCare/cliente/areacliente.html";
         }
         // Si la respuesta es 401 o cualquier otro código, no se realiza ninguna acción
     })
