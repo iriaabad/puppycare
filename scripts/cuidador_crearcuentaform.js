@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", async function () {
+   // Verificar si los elementos existen en el DOM
+   const formcrearcuenta = document.getElementById("formulariocrearcuenta-placeholder");
+
+   // Cargar scripts en función de los elementos encontrados
+
+   if (formcrearcuenta) {
+       cargarScript("//localhost/puppyCare/PuppyCare/scripts/partials/crearcuentaform.js");
+   }
     // Función para obtener datos del usuario autenticado.
     async function getAuthenticatedUser() {
         try {
@@ -156,5 +164,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       });
     }
+
+    // Función para cargar un script dinámicamente
+function cargarScript(src) {
+  return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+       resolve();
+      };
+      script.onerror = () => {
+          console.error(`Error cargando el script: ${src}`);
+          reject();
+      };
+      document.body.appendChild(script);
+  });
+}
   });
   

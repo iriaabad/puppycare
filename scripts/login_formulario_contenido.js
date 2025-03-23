@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Tu código aquí
-
 // Primero, mostramos la pantalla de carga mientras se realiza la verificación
 document.getElementById('loading-screen').style.display = 'block';
 

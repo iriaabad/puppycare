@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
         const logoutBtn = document.getElementById("logout-btn");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 credentials: "include"  // Para incluir la cookie de sesión
             });
             if (response.ok) {
-                // Limpia los datos de sesión en el cliente, si es necesario
                 localStorage.removeItem("access_token");
                 window.location.href = "//localhost/puppyCare/PuppyCare/index.html";
             } else {
@@ -27,7 +25,4 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error:", error);
         }
     }
-    
-    // Asocia la función al botón de "Cerrar Sesión"
-    document.getElementById("logout-btn").addEventListener("click", logout);
 });

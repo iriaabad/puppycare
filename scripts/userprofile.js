@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
         credentials: "include"
     })
     .then(response => {
-        if (response.status === 401) throw new Error("No autenticado");
+        if (response.status === 401) throw new Error("No autenticado: mostrando botón de login");
         return response.json();
     })
     .then(user => {

@@ -25,25 +25,46 @@ document.addEventListener("DOMContentLoaded", async function () {
         const userLng = position.coords.longitude;
 
         // Inicializar el mapa centrado en la posición del usuario y asignarlo a la variable global
-        map = L.map("map").setView([userLat, userLng], 13);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
+        map = L.map("map").setView([userLat, userLng], 10);
+
+        // Crear y añadir la capa de teselas
+        const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 10,
         }).addTo(map);
 
-        //Se agrega un setTimeout para forzar el reajuste del tamaño del mapa tras su renderizado
-        setTimeout(function () {
-            if (map) {
-                map.invalidateSize();
-            }
-        }, 50);
+        // Ocultar el mensaje cuando la capa se haya cargado
+        tileLayer.on("load", function () {
+            ocultarMensajeCarga();
+        });
 
-        // Se agrega un listener al evento "resize" para actualizar el tamaño del mapa al cambiar la ventana
+        // Además, usar un setTimeout para forzar la ocultación después de 5 segundos (por ejemplo)
+        setTimeout(function () {
+            ocultarMensajeCarga();
+        }, 5000);
+
+        // Función para ocultar el mensaje de carga (si aún existe)
+        function ocultarMensajeCarga() {
+            const loadingMessage = document.getElementById("map-loading");
+            if (loadingMessage && loadingMessage.style.display !== "none") {
+                loadingMessage.style.display = "none";
+            }
+        }
+
+        // Forzar el reajuste del tamaño del mapa cuando la ventana se cargue y se redimensione
+        window.addEventListener("load", function () {
+            // Después de un breve retraso, para asegurar que el mapa ya esté visible
+            setTimeout(function () {
+                if (map) {
+                    map.invalidateSize();
+                }
+            }, 50);
+        });
+        // Actualizar el tamaño del mapa al cambiar la ventana
         window.addEventListener("resize", function () {
             if (map) {
                 map.invalidateSize();
             }
         });
-
         function cargarCuidadores(params = "") {
             fetch(`http://127.0.0.1:8000/cuidadores/obtener/disponibles?${params}`)
                 .then(response => response.json())
@@ -52,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     const userLat = map.getCenter().lat;
                     const userLng = map.getCenter().lng;
 
-                     // Filtrar cuidadores con disponibilidad activa en 1
+                    // Filtrar cuidadores con disponibilidad activa en 1
                     const cuidadoresDisponibles = cuidadores.filter(cuidador => cuidador.disponibilidad_activa === true);
 
                     // Calcular la distancia de cada cuidador y ordenar
@@ -155,7 +176,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 // Asignar evento de selección
                 item.querySelector(".seleccionar-btn").addEventListener("click", () => {
                     seleccionarCuidador(cuidador.id_cuidador, cuidadores);
+
+                    // Centrar el mapa en el marcador del cuidador seleccionado
+                    if (map && cuidador.usuario.latitud && cuidador.usuario.longitud) {
+                        map.setView([cuidador.usuario.latitud, cuidador.usuario.longitud], 10);
+                    }
                 });
+
             });
         }
         // Evento al presionar "Buscar"
@@ -314,8 +341,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 })
                 .catch(err => console.error("Error en el envío:", err));
         }
-    
-}
+
+    }
     function calcularPrecioReserva(fecha_inicio, fecha_fin, cantidadMascotas, tarifaDia) {
         // Convertir las fechas a objetos Date
         const inicio = new Date(fecha_inicio);
@@ -352,6 +379,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.error("Error al obtener el cuidador:", error);
         }
     }
-    
+
 
 });
