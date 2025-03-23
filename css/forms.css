@@ -42,47 +42,7 @@
   
   
   
-  /* Formato de reseñas en la pagina cliente*/
   
-  .carousel-container {
-      width: auto;
-      overflow: hidden;
-      position: relative;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      white-space: nowrap; /* Evita que los elementos salten de línea */
-    }
-  
-    .carousel-resena {
-        display: flex; /* Alinea los elementos en una fila*/
-        transition: transform 0.8s ease-in-out; 
-    }
-    
-    .cardResena {
-        flex: 0 0 90%; /* Cada tarjeta ocupa el 100% del contenedor */
-        transition: 0.3s;
-        border: 1px solid #ddd;
-        padding: 5%;
-        background: white;
-        text-align: center;
-        border-radius: 10px;
-    }
-    .cardResena:hover {
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-    
-    .cardResena img {
-      flex: inherit;
-      height: 10px;
-      width: 10px;
-      margin-right: 20px; /* Espacio entre la imagen y el texto */
-    }
-  
-    .puntuacionestrellas i {
-      color: gold;
-      font-size: 1.2em;
-      margin-right: 2px;
-    }
   
   /* Formato formulario inicio sesión*/
   
@@ -90,7 +50,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 40%;  
+    width: 50%;  
     padding: 3%;
   
   }
@@ -103,16 +63,16 @@
   
   }
   
-    .form-group {
+  .form-group {
       margin-bottom: 5px;
   }
   
   .form-box {
-      width: 70%;
+      width: 100%;
       padding: 12px 10px 12px 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 0.9em;
   }
   
   .form-box:focus {

@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Área cuidador</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script> -->
-  <!-- <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script> -->
-  <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+  <link rel="stylesheet" href="/puppyCare/PuppyCare/css/styles.css">
+  <link rel="stylesheet" href="css/areacuidador.css">
 </head>
 
-<body>
+<body class="site-container">
   <header>
-    <div id="header-placeholder"></div>
-    <div class="header-container">
+    <div id="header-placeholder" class="header-container"></div>
+    <div>
       <h1 id="saludo"></h1>
     </div>
   </header>
-  <main class="site-body">
+
+  <main class="site-body" id="main">
     <!-- Contenedor de la pantalla de carga -->
     <div id="loading-screen" style="display: none;">
       <p>Cargando...</p>
@@ -26,32 +25,31 @@
 
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-
     <!-- Contenido si el cuidador está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
-
-      <div class="opciones">
-        <a href="perfil.html">Modificar datos personales</a>
-        <a href="opcionesReserva.html">Modificar opciones de reserva</a>
-        <a href="calendario.html">Ver o modificar calendario</a>
-        <a href="mensajes.html">Ver mis mensajes</a>
+      <div id="contenedor-flex" class="contenedor-flex">
+        <div class="contenedor-opciones">
+          <h2>¿Qué quieres hacer hoy?</h2>
+          <div class="opciones">
+            <a href="perfil.html">Modificar datos personales</a>
+            <a href="opcionesReserva.html">Modificar opciones de reserva</a>
+            <a href="calendario.html">Ver o modificar calendario</a>
+            <!-- <a href="mensajes.html">Ver mis mensajes</a> -->
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="img/perro_tumbado.png" alt="Imagen de perro tumbado">
+        </div>
       </div>
-
-      <!-- Imagen al otro lado -->
-      <div class="image-container">
-        <img src="img/perro.png" alt="Imagen simpática de perro">
-      </div>
-    </div>
     </div>
   </main>
-  <div id="footer-placeholder"></div>
-
-  <!-- Enlace a los scripts externos -->
-  <script src="//localhost/puppyCare/PuppyCare/scripts/headerdisplay.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
-
-
+  <div id="footer-placeholder">
+    <!-- Enlace a los scripts externos -->
+    <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cerrar_sesion.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+  </div>
 </body>
 
 </html>

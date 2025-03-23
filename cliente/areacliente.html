@@ -5,43 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Área cliente</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/menuprincipalcliente.css">
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
+  <link rel="stylesheet" href="/puppyCare/PuppyCare/css/styles.css">
+  <link rel="stylesheet" href="css/areacliente.css">
 </head>
 
-<body>
-  <header>
-    <div id="header-placeholder"></div>
-    <div class="header-container">
+<body class="site-container">
+  <header class="header-container">
+    <div id="header-placeholder" class="site-header"></div>
+    <div>
       <h1 id="saludo-cliente"></h1>
     </div>
   </header>
   <main class="site-body">
+    <!-- Contenedor de la pantalla de carga -->
+    <div id="loading-screen" style="display: none;">
+      <p>Cargando...</p>
+    </div>
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
     <!-- Contenido si el cliente está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
-      <div class="opcionescliente">
-        <a href="perfil.html">Mis datos</a>
-        <a href="mascotas.html">Mis mascotas</a>
-        <a href="crearReserva.html">Hacer una reserva</a>
-        <a href="reservas.html">Ver mis reservas</a>
-        <a href="mensajes.html">Ver mis mensajes</a>
+      <div id="contenedor-flex" class="contenedor-flex">
+        <div class="contenedor-opciones">
+          <h2>¿Qué quieres hacer hoy?</h2>
+          <div class="opcionescliente">
+            <a href="perfil.html">Mis datos</a>
+            <a href="mascotas.html">Mis mascotas</a>
+            <a href="crearReserva.html">Hacer una reserva</a>
+            <a href="reservas.html">Ver mis reservas</a>
+            <!-- <a href="mensajes.html">Ver mis mensajes</a> -->
+          </div>
+        </div>
+        <!-- Imagen al otro lado -->
+        <div class="image-container">
+          <img src="img/perro.png" alt="Imagen simpática de perro">
+        </div>
       </div>
-      <!-- Imagen al otro lado -->
-      <div class="image-container">
-        <img src="img/perro.png" alt="Imagen simpática de perro">
-      </div>
-    </div>
     </div>
   </main>
-  <div id="footer-placeholder"></div>
-  <!-- Enlace a los scripts externos -->
-  <script src="//localhost/puppyCare/PuppyCare/scripts/headerdisplay.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
+  <div id="footer-placeholder">
+    <!-- Enlace a los scripts externos -->
+    <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cerrar_sesion.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+  </div>
 </body>
 
 </html>

@@ -1,9 +1,0 @@
-
-body {
-
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    flex: 1; /* Permite que el main ocupe el espacio disponible */
-  }
-

@@ -5,46 +5,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Opciones de reserva</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/puppyCare/PuppyCare/css/styles.css">
+  <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/menucuidador.css">
 </head>
 
-<body>
-  <header>
-    <div id="menucuidador-placeholder"></div>
+<body class="site-container">
+  <header class="header-container">
+    <div id="menucuidador-placeholder" class="site-header"></div>
   </header>
   <main class="site-body">
+    <!-- Contenedor de la pantalla de carga -->
+    <div id="loading-screen" style="display: none;">
+      <p>Cargando...</p>
+    </div>
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-
     <!-- Contenido si el cuidador está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
       <h2>Opciones de reserva</h2>
       <form id="cuidador-form">
-        <label for="tarifa_dia">Taria por día:</label>
-        <input type="number" id="tarifa_dia" disabled><br>
-
-        <label for="capacidad_mascotas">Número de mascotas que puedes alojar:</label>
-        <input type="text" id="capacidad_mascotas" disabled><br>
-
-        <label for="descripcion">Cuénta algo sobre tí:</label>
-        <input type="text" id="descripcion" disabled><br>
-
-        <label for="disponibilidad_activa">Estoy disponible para reservas</label>
-        <input type="checkbox" id="disponibilidad_activa" disabled><br>
-
-        <button type="button" id="editar-btn">Editar</button>
-        <button type="submit" id="guardar-btn" style="display:none;">Guardar</button>
+        <div class="form-group">
+          <label for="tarifa_dia" class="label">Tarifa por día:</label>
+          <input type="number" id="tarifa_dia" disabled class="form-box" placeholder="Tarifa por día">
+        </div>
+        <div class="form-group">
+          <label for="capacidad_mascotas" class="label">Número de mascotas que puedes alojar:</label>
+          <input type="text" id="capacidad_mascotas" disabled class="form-box" placeholder="Número de mascotas">
+        </div>
+        <div class="form-group">
+          <label for="descripcion" class="label">Cuénta algo sobre ti:</label>
+          <input type="text" id="descripcion" disabled class="form-box" placeholder="Descripción">
+        </div>
+        <div class="checkbox-group">
+          <label for="disponibilidad_activa" class="label-checkbox">Estoy disponible para reservas</label>
+          <input type="checkbox" id="disponibilidad_activa" disabled class="form-box-checkbox">
+        </div>
+        <div class="form-group">
+          <button type="button" id="editar-btn" class="form-box-button">Editar</button>
+          <button type="submit" id="guardar-btn" style="display:none;" class="form-box-button">Guardar</button>
+        </div>
       </form>
-
-
     </div>
   </main>
-  <div id="footer-placeholder"></div>
+  <div id="footer-placeholder">
 
-  <!-- Enlace a los scripts externos -->
-  <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
-  <script src="scripts/mostrarmenucuidador.js"></script>
-  <script src="scripts/cuidador_actualizardatos.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
+    <!-- Enlace a los scripts externos -->
+    <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cerrar_sesion.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+    <script src="scripts/mostrarmenucuidador.js"></script>
+    <script src="scripts/cuidador_actualizardatos.js"></script>
+  </div>
+</body>
+
+</html>

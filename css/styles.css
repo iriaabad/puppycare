@@ -1,23 +1,41 @@
 
+/* Importar la fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
+
+.site-container {
+  display: flex;
+  flex-direction: column;
+  /* z-index: 10; */
+}
+
+/* Estilos para el header */
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  /* margin-bottom: auto; */
+}
 
 /*Formato de la imagen del header*/
 .header-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
 .imgportada{
-  width: 100vw;  
   height: 40vh;  
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center;
 ;}
 
 
 .header-container h1 {
   position: absolute;
   font-family:Impact;
-  top: 18%;  /* Centrar verticalmente */
+  top: 50%;  /* mover verticalmente */
   left: 30%; 
   transform: translate(-50%, -50%); /* Ajuste fino */
   color: white; /* Asegurar visibilidad */
@@ -26,25 +44,34 @@
 }
 
 
-body {
-  margin-top: 50px;
-  flex: 1; /* Permite que el main ocupe el espacio disponible */
+/* Estilos para el cuerpo */
+.site-body {
+  flex: 1; /* Permite que el body ocupe el espacio disponible */
+  padding: 20px;
+  margin-top: 8vh;
+  overflow: hidden; /* Evita que el contenido desborde */
 }
 
+/* Estilos para el footer */
+.site-footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto; /* Asegura que el footer se mantenga al final */
+}
 
-
-/* test */
-/* Importar la fuente desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
-
-/* Tipografía general para el cuerpo */
+/* Estilos generales para el body */
 body {
-    font-family: 'Roboto', sans-serif; /* Fuente base */
-    background-color: #f4f7fb; /* Color de fondo suave */
-    color: #333; /* Color del texto principal */
-    line-height: 1.6; /* Mejora la legibilidad */
-    margin: 0;
-    padding: 0;
+  font-family: 'Roboto', sans-serif; /* Fuente de la página */
+  background-color: #f4f7fb; /* Color de fondo suave */
+  color: #333;
+  display: flex;
+  flex-direction: column; /* Organiza los elementos verticalmente */
+  min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+  line-height: 1.6; /* Mejora la legibilidad */
+  margin: 0;
+  padding: 0;
 }
 
 /* Estilo para los encabezados (títulos) */
@@ -59,11 +86,10 @@ h1, h2, h3, h4, h5, h6 {
 p {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 12px;
     color: #666; /* Color gris suave para párrafos */
     margin-bottom: 20px;
 }
-
 
 /* Botones */
 button {
@@ -84,49 +110,97 @@ button:hover {
 }
 
 /* Reseteo básico de márgenes y padding */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
-/* Estilos generales para el body */
-body {
-  font-family: 'Roboto', sans-serif; /* Fuente de la página */
-  background-color: #f4f7fb; /* Color de fondo suave */
-  color: #333;
-  display: flex;
-  flex-direction: column; /* Organiza los elementos verticalmente */
-  min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
-}
 
-/* Estilos para el header */
-.site-header {
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
 
-/* Estilo de la barra de navegación dentro del header */
+/* Estilo de la barra de navegación dentro del header
 .navbar-general {
-  display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
-  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+ */
+  /* Estilos generales para la barra de navegación */
+  .navbar-general {
+    display: flex;
+    justify-content: flex-start; /*Alinea los elementos a la izquierda*/
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8); /*Fondo translúcido*/
+    backdrop-filter: blur(10px); /* Efecto difuminado */ 
+    padding: 15px 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    margin-bottom: 20px;
+    gap: clamp(20px, 40vw, 40vw);
 }
 
-/* Estilos para el cuerpo */
-.site-body {
-  flex: 1; /* Permite que el body ocupe el espacio disponible */
-  padding: 20px;
-  overflow: hidden; /* Evita que el contenido desborde */
+
+/* Contenedor de los enlaces */
+.navbar-links {
+  display: flex;
+  gap: 20px;
 }
 
-/* Estilos para el footer */
-.site-footer {
-  background-color: #333;
+/* Estilos de los enlaces */
+.navbar-links a {
+  display: flex;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #555;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+/* Efecto hover en los enlaces */
+.navbar-links a:hover {
+  background: #e0e2e5;
   color: white;
-  padding: 20px;
-  text-align: center;
-  margin-top: auto; /* Asegura que el footer se mantenga al final */
 }
+
+.user-profile a {
+  /* display: flex; */
+  /* flex-direction: row; */
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #555;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column;
+      padding: 10px;
+      position: relative;
+      gap: clamp(20px, 20vw, 40vw);
+
+
+  }
+
+  .navbar-links {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+  }
+
+  .navbar-links a {
+      display: block;
+      width: 100%;
+  }
+}
+
+

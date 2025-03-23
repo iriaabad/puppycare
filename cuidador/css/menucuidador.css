@@ -1,7 +1,7 @@
 
   
   /* Estilos generales para la barra de navegación */
-  .navbarcliente {
+  .navbarcuidador {
     display: flex;
     justify-content: space-between;
     align-items: left;
@@ -12,17 +12,17 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    /* z-index: 1000; */
 }
 
 /* Contenedor de los enlaces */
-.navbar-cliente {
+.navbar-cuidador {
     display: flex;
     gap: 20px;
 }
 
 /* Estilos de los enlaces */
-.navbar-cliente a {
+.navbar-cuidador a {
     text-decoration: none;
     font-size: 1.2rem;
     color: #555;
@@ -32,27 +32,27 @@
 }
 
 /* Efecto hover en los enlaces */
-.navbar-cliente a:hover {
+.navbar-cuidador a:hover {
     background: #e0e2e5;
     color: white;
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-    .navbarcliente {
+    .navbarcuidador {
         flex-direction: column;
         padding: 10px;
         position: relative;
 
     }
 
-    .navbar-cliente {
+    .navbar-cuidador {
         flex-direction: column;
         text-align: center;
         gap: 10px;
     }
 
-    .navbar-cliente a {
+    .navbar-cuidador a {
 /*         display: block; */
         width: 100%;
     }

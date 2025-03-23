@@ -1,0 +1,51 @@
+ 
+  .form-group {
+    margin-bottom: 5px;
+}
+
+.form-box {
+    width: 50%;
+    padding: 12px 10px 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+
+.form-box-button {
+    margin: 12px 10px 12px 0px;
+    width: 50%;
+}
+
+.form-box:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.label {
+    display: block;       /* Se muestra en línea completa */
+    margin-bottom: 5px;     /* Espacio entre la label y el input */
+    font-size: 0.9em;
+    color: #aaa;
+    transition: 0.3s ease;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+  }
+  
+  .label-checkbox {
+    margin-right: 5px;
+    font-size: 0.9em;
+    color: #9c9c9c;
+  }
+  
+  .form-box-checkbox {
+    width: auto; 
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-left: 0;
+  }

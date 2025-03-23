@@ -5,59 +5,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil cuidador</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/puppyCare/PuppyCare/css/styles.css">
+  <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/menucuidador.css">
 
 </head>
 
-<body>
-  <header>
-    <div id="menucuidador-placeholder"></div>
+<body class="site-container">
+  <header class="header-container">
+    <div id="menucuidador-placeholder" class="site-header"></div>
   </header>
   <main class="site-body">
+    <!-- Contenedor de la pantalla de carga -->
+    <div id="loading-screen" style="display: none;">
+      <p>Cargando...</p>
+    </div>
     <!-- Formulario de login -->
     <div id="formulariologin" style="display: none;"></div>
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-
     <!-- Contenido si el cuidador está autenticado -->
     <div id="areaprivada" class="areaprivada" style="display: none;">
       <h2>Información del Usuario</h2>
       <form id="user-form">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" disabled><br>
-
-        <label for="apellido1">Primer apellido:</label>
-        <input type="text" id="apellido1" disabled><br>
-
-        <label for="apellido2">Segundo apellido:</label>
-        <input type="text" id="apellido2" disabled><br>
-
-        <label for="emailuser">Email:</label>
-        <input type="email" id="emailuser" disabled suggested:"email"><br>
-
+        <div class="form-group">
+          <label for="nombre" class="label">Nombre:</label>
+          <input type="text" id="nombre" disabled class="form-box" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido1" class="label">Primer apellido:</label>
+          <input type="text" id="apellido1" disabled class="form-box" placeholder="Primer apellido">
+        </div>
+        <div class="form-group">
+          <label for="apellido2" class="label">Segundo apellido:</label>
+          <input type="text" id="apellido2" disabled class="form-box" placeholder="Segundo apellido">
+        </div>
+        <div class="form-group">
+          <label for="emailuser" class="label">Email:</label>
+          <input type="email" id="emailuser" disabled class="form-box" placeholder="Email">
+        </div>
         <h3>Dirección</h3>
-        <label for="calle">Calle:</label>
-        <input type="text" id="calle" disabled><br>
-        <label for="numero">Número:</label>
-        <input type="text" id="numero" disabled><br>
-        <label for="piso">Piso:</label>
-        <input type="text" id="piso" disabled><br>
-        <label for="codigopostal">Código postal:</label>
-        <input type="text" id="codigopostal" disabled><br>
-        <label for="ciudad">Ciudad:</label>
-        <input type="text" id="ciudad" disabled><br>
-
-        <button type="button" id="editar-btn">Editar</button>
-        <button type="submit" id="guardar-btn" style="display:none;">Guardar</button>
+        <div class="form-group">
+          <label for="calle" class="label">Calle:</label>
+          <input type="text" id="calle" disabled class="form-box" placeholder="Calle">
+        </div>
+        <div class="form-group">
+          <label for="numero" class="label">Número:</label>
+          <input type="text" id="numero" disabled class="form-box" placeholder="Número">
+        </div>
+        <div class="form-group">
+          <label for="piso" class="label">Piso:</label>
+          <input type="text" id="piso" disabled class="form-box" placeholder="Piso">
+        </div>
+        <div class="form-group">
+          <label for="codigopostal" class="label">Código postal:</label>
+          <input type="text" id="codigopostal" disabled class="form-box" placeholder="Código postal">
+        </div>
+        <div class="form-group">
+          <label for="ciudad" class="label">Ciudad:</label>
+          <input type="text" id="ciudad" disabled class="form-box" placeholder="Ciudad">
+        </div>
+        <div class="form-group">
+          <button type="button" id="editar-btn" class="form-box-button">Editar</button>
+          <button type="submit" id="guardar-btn" style="display:none;" class="form-box-button">Guardar</button>
+        </div>
       </form>
     </div>
-    </div>
   </main>
-  <div id="footer-placeholder"></div>
+  <div id="footer-placeholder">
 
-  <!-- Enlace a los scripts externos -->
-  <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
-  <script src="scripts/mostrarmenucuidador.js"></script>
-  <script src="/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/actualizar_datoUsuario.js"></script>
+    <!-- Enlace a los scripts externos -->
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cerrar_sesion.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/actualizar_datoUsuario.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
+    <script src="scripts/mostrarmenucuidador.js"></script>
+  </div>
+</body>
+
+</html>

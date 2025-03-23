@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opciones de reserva</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/menucuidador.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="calendario.css">
+    <link rel="stylesheet" href="/puppyCare/PuppyCare/css/styles.css">
+    <link rel="stylesheet" href="css/menucuidador.css">
+    <link rel="stylesheet" href="css/calendario.css">
 </head>
 
-<body>
-    <header>
-        <div id="menucuidador-placeholder"></div>
+<body class="site-container">
+    <header class="header-container">
+        <div id="menucuidador-placeholder" class="site-header"></div>
     </header>
     <main class="site-body">
+        <!-- Contenedor de la pantalla de carga -->
+        <div id="loading-screen" style="display: none;">
+            <p>Cargando...</p>
+        </div>
         <!-- Formulario de login -->
         <div id="formulariologin" style="display: none;"></div>
-        <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-
         <!-- Contenido si el cuidador está autenticado -->
         <div id="areaprivada" class="areaprivada" style="display: none;">
-            <br>
-            <br>
             <h2>Calendario de Eventos</h2>
 
             <div id="calendar"></div>
@@ -47,28 +47,22 @@
                     <label for="event-tipo_evento">Tipo:</label>
                     <select id="event-tipo_evento" name="tipo_evento_id_tipo_evento" required>
                         <option value="">Seleccione...</option>
-                      </select><br>
+                    </select><br>
                     <button type="submit">Guardar Evento</button>
                 </form>
             </div>
-
-
         </div>
-        <div id="footer-placeholder"></div>
-
-        <!-- Enlace a los scripts externos -->
-        <script src="//localhost/puppyCare/PuppyCare/scripts/footerdisplay.js"></script>
-        <script src="scripts/mostrarmenucuidador.js"></script>
-        <script src="//localhost/puppyCare/PuppyCare/scripts/login_mostrarcontenido.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-        <script src="scripts/eventos_cuidador.js"></script>
-
-
-
-
-
-
     </main>
+    <div id="footer-placeholder">
+    <!-- Enlace a los scripts externos -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/script_maestro.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cerrar_sesion.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_formulario_contenido.js"></script>
+    <script src="scripts/eventos_cuidador.js"></script>
+    <script src="scripts/mostrarmenucuidador.js"></script>
+</div>
 </body>
 
 </html>

@@ -7,22 +7,18 @@
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <title>Cuidadores de mascotas</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/forms.css">
   <script src="scripts/cuidadorlogin_redireccionsicorrecto.js"></script>
-  <script src="//localhost/puppyCare/PuppyCare/scripts/login_formulario.js"></script>
-
-
 </head>
-
-<body>
+<body class="site-container">
   <header>
     <div id="header-placeholder"></div>
     <div class="header-container">
       <h1>Puppy Care</h1>
-      <img src="img/Portada.png" alt="Portada" class="imgportada">
+      <img src="img/portada1.png" alt="Portada" class="imgportada">
     </div>
   </header>
   <main class="site-body">
-    <script src="//localhost/puppyCare/PuppyCare/scripts/login_validar.js"></script>
     <div class="contenedor-main">
       <div class="crearcuenta">
         <h1>¿Quieres cuidar mascotas y ganar dinero?</h1>
@@ -32,11 +28,12 @@
           y horarios, y disfruta de la compañía de adorables mascotas. ¡Regístrate hoy y forma parte de nuestra red de
           cuidadores confiables!
         </p>
-        <p class="ofertalogin" id="ofertalogin">¿Ya tienes cuenta? <a href="">Inicia sesión para continuar el registro</a></p>
+        <p class="ofertalogin">¿Ya tienes cuenta? <a href="" id="ofertalogin">Inicia sesión para continuar el
+            registro</a></p>
         <div id="formulariocrearcuenta-placeholder">
         </div>
-          <!-- Formulario de login -->
-          <div id="formulariologin" style="display: none;"></div>
+        <!-- Formulario de login -->
+        <div id="formulariologin" style="display: none;"></div>
         <div id="formularioparte2">
           <form id="formulariocrearcuentacuidador2" class="form-cuenta" style="display: none;">
             <h2>Completa los datos en tu cuenta</h2>
@@ -50,11 +47,12 @@
             </div>
             <div class="form-group">
               <label for="piso" class="label">Piso:</label>
-              <input type="text" name="piso" id="piso" class="form-box" required placeholder="Piso">  
+              <input type="text" name="piso" id="piso" class="form-box" required placeholder="Piso">
             </div>
             <div class="form-group">
               <label for="codigopostal" class="label">Código Postal:</label>
-              <input type="text" name="codigopostal" id="codigopostal" class="form-box" required placeholder="Código postal">
+              <input type="text" name="codigopostal" id="codigopostal" class="form-box" required
+                placeholder="Código postal">
             </div>
             <div class="form-group">
               <label for="ciudad" class="label">Ciudad:</label>
@@ -67,30 +65,36 @@
           <form id="formulariocrearcuentacuidador3" class="form-cuenta" style="display: none;">
             <div class="form-group">
               <label for="tarifa_dia"></label>
-              <input type="text" name="tarifa_dia" id="tarifa_dia" class="form-box" required placeholder="Tarifa diaria"><br>
+              <input type="text" name="tarifa_dia" id="tarifa_dia" class="form-box" required
+                placeholder="Tarifa diaria"><br>
             </div>
             <div class="form-group">
               <label for="capacidad_mascota">Cantidad de mascotas que puedes alojar:</label>
-              <input type="number" name="capacidad_mascota" id="capacidad_mascota" class="form-box" required placeholder="Cantidad"><br>
+              <input type="number" name="capacidad_mascota" id="capacidad_mascota" class="form-box" required
+                placeholder="Cantidad"><br>
             </div>
             <div class="form-group">
               <label for="descripcion" class="label">Preséntate en una frase:</label>
-              <input type="text" name="descripcion" id="descripcion" class="form-box" required placeholder="Algo sobre tí">  
+              <input type="text" name="descripcion" id="descripcion" class="form-box" required
+                placeholder="Algo sobre tí">
             </div>
             <div class="form-group">
-              <label for="disponibilidad_activa" class="label">¿Quieres comenzar a recibir solicitudes de reserva?</label>
-              <input type="checkbox" name="disponibilidad_activa" id="disponibilidad_activa" class="form-box" checked>  
+              <label for="disponibilidad_activa" class="label">¿Quieres comenzar a recibir solicitudes de
+                reserva?</label>
+              <input type="checkbox" name="disponibilidad_activa" id="disponibilidad_activa" class="form-box" checked>
             </div>
             <button type="submit">Finalizar registro</button>
           </form>
         </div>
       </div>
   </main>
-  <div id="footer-placeholder"></div>
+  <div id="footer-placeholder">
 
   <!-- Enlace a los scripts externos -->
   <script src="scripts/script_maestro.js"></script>
-  <script src="/puppyCare/PuppyCare/cuidador/scripts/cuidador_actualizardatos.js"></script>
-
+  <script src="/puppyCare/PuppyCare/scripts/cuidador_crearcuentaform.js"></script>
+  <script src="/puppyCare/PuppyCare/scripts/actualizar_datoUsuario.js"></script>
+  <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+</div>
 </body>
 </html>
