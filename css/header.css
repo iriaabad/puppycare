@@ -1,23 +1,4 @@
 
-  
-  /* Estilos generales para la barra de navegación */
-.navbar-general {
-    display: flex;
-    justify-content: flex-start; /* Alinea los elementos a la izquierda */
-    align-items: center;
-   /*align-items: left;*/
-    background: rgba(255, 255, 255, 0.8); /* Fondo translúcido */
-    backdrop-filter: blur(10px); /* Efecto difuminado */
-    padding: 15px 30px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    gap: clamp(20px, 60vw, 70vw);
-}
-
 
 /* Contenedor de los enlaces */
 .navbar-links {

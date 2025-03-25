@@ -105,13 +105,21 @@ async function fetchSelectOptions(url, selectElement, idField, nameField) {
   document.getElementById('mascota-form').addEventListener('submit', async function (event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+    const clienteId = await obtenerCliente();  // Obtén el clienteId dinámicamente
+
+    if (!clienteId) {
+      alert("No se pudo obtener el cliente.");
+      return;
+    }
+  
+
     const data = {
       nombre: formData.get('nombre'),
       edad: formData.get('edad') ? parseInt(formData.get('edad')) : null,
       tipo_mascota_id_tipo_mascota: parseInt(formData.get('tipo_mascota_id_tipo_mascota') || formData.get('tipo')),
       tamano_id_tamano: formData.get('tamano_id_tamano') ? parseInt(formData.get('tamano_id_tamano')) : null,
       necesidades_especiales: formData.get('necesidades_especiales'),
-      cliente_id_cliente: formData.get('cliente_id_cliente') ? parseInt(formData.get('cliente_id_cliente')) : null,
+      cliente_id_cliente: clienteId
     };
 
     // Aseguramos que siempre convertimos a número correctamente
@@ -128,6 +136,9 @@ async function fetchSelectOptions(url, selectElement, idField, nameField) {
       });
       if (!response.ok) throw new Error("Error al crear mascota");
       alert("Mascota creada correctamente");
+    // Ocultar el formulario después de crear la mascota
+    document.getElementById("mascota-form").style.display = "none";
+
       event.target.reset();
       loadMascotas();
     } catch (error) {

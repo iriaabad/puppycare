@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, func
 from fastapi import HTTPException
-from db.models.models import Cuidador
-from db.models.models import Reserva
+from db.models.models import Cuidador, User
+from db.models.models import Reserva, EstadoReserva
 from schemas.reserva import ReservaCreate, ReservaUpdate
 
 def get_reserva(db: Session, id_reserva: int):
@@ -10,6 +10,31 @@ def get_reserva(db: Session, id_reserva: int):
 
 def get_reservas(db: Session, skip: int = 0, limit: int = 100):
     return db.query(Reserva).offset(skip).limit(limit).all()
+
+def get_reservas_cliente(db: Session, id_cliente: int, skip: int = 0, limit: int = 100):
+    reservas = (
+        db.query(
+            Reserva.id_reserva,
+            Reserva.fecha_inicio,
+            Reserva.fecha_fin,
+            Reserva.cantidad_mascotas,
+            Reserva.cliente_id_cliente,  
+            Reserva.cuidador_id_cuidador, 
+            Reserva.precio_total, 
+            EstadoReserva.id_estado.label("estado_reserva_id_estado"),  
+            User.nombre.label("nombre_cuidador"),
+            EstadoReserva.descripcion.label("estado_reserva")
+        )
+        .join(Cuidador, Reserva.cuidador_id_cuidador == Cuidador.id_cuidador)
+        .join(User, Cuidador.usuario_id_usuario == User.id_usuario)  
+        .join(EstadoReserva, Reserva.estado_reserva_id_estado == EstadoReserva.id_estado)
+        .filter(Reserva.cliente_id_cliente == id_cliente)  # <-- FILTRAR SOLO LAS RESERVAS DEL CLIENTE
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+
+    return reservas
 
 def create_reserva(db: Session, reserva: ReservaCreate):
     # Obtener la capacidad del cuidador

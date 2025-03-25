@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
 from typing import List
 from db.client import get_db
-from db.models.models import Reserva, Calendario, EventoCalendario
+from db.models.models import Reserva, Calendario, EventoCalendario, Cuidador, EstadoReserva, User
 from schemas.reserva import ReservaCreate, ReservaResponse, ReservaUpdate, ReservaBase
-from db.cruds.reserva import get_reserva, get_reservas, create_reserva, update_reserva, delete_reserva
+from db.cruds.reserva import get_reserva, get_reservas, create_reserva, update_reserva, delete_reserva, get_reservas_cliente
 
 router = APIRouter(prefix="/reservas", tags=["Reservas"])
 
@@ -51,12 +51,11 @@ def read_reserva_endpoint(id_reserva: int, db: Session = Depends(get_db)):
 
 @router.get("/cliente/{id_cliente}", response_model=List[ReservaResponse])
 def read_reservas_cliente(id_cliente: int, db: Session = Depends(get_db)):
-    db_reservas = db.query(Reserva).filter(Reserva.cliente_id_cliente == id_cliente).all()
-    
+    db_reservas = get_reservas_cliente(db, id_cliente=id_cliente, skip=0, limit=100) 
     if not db_reservas:
         raise HTTPException(status_code=404, detail="No se encontraron reservas para este cliente")
-    
     return [ReservaResponse.model_validate(reserva) for reserva in db_reservas]
+
 
 
 @router.put("/reserva/{id_reserva}", response_model=ReservaResponse)

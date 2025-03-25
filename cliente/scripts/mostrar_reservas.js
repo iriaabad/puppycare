@@ -43,7 +43,7 @@ async function loadReservas(id_cliente) {
     try {
         const response = await fetch(`http://127.0.0.1:8000/reservas/cliente/${id_cliente}`);
         if (!response.ok) throw new Error("Error al cargar reservas");
-        
+
         const reservas = await response.json();
         const container = document.getElementById('reservas-container');
         container.innerHTML = "";
@@ -52,12 +52,13 @@ async function loadReservas(id_cliente) {
             const card = document.createElement('div');
             card.className = "card";
             card.innerHTML = `
-                <h3>Código de reserva: ${reserva.id_reserva}</h3>
-                <p><strong>Fecha Inicio:</strong> ${reserva.fecha_inicio}</p>
-                <p><strong>Fecha Fin:</strong> ${reserva.fecha_fin}</p>
-                <p><strong>Cantidad de Mascotas:</strong> ${reserva.cantidad_mascotas}</p>
-                <p><strong>Precio Total:</strong> $${reserva.precio_total.toFixed(2)}</p>
-                <p><strong>Estado:</strong> ${reserva.estado_reserva_id_estado}</p>
+        <h3>Código de reserva: ${reserva.id_reserva}</h3>
+        <p><strong>Fecha Inicio:</strong> ${reserva.fecha_inicio}</p>
+        <p><strong>Fecha Fin:</strong> ${reserva.fecha_fin}</p>
+        <p><strong>Cantidad de Mascotas:</strong> ${reserva.cantidad_mascotas}</p>
+        <p><strong>Precio Total:</strong> ${reserva.precio_total.toFixed(2)}€</p>
+        <p><strong>Cuidador:</strong> ${reserva.nombre_cuidador}</p>
+        <p><strong>Estado:</strong> ${reserva.estado_reserva}</p>
             `;
             container.appendChild(card);
         });

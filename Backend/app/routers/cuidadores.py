@@ -20,17 +20,16 @@ def get_cuidadores(usuario_id_usuario: Optional[int] = None, db: Session = Depen
     cuidadores = query.all()
     return cuidadores
 
+    
+
 @router.get("/obtener/disponibles/", response_model=List[CuidadorResponse])
 def get_cuidadores_disponibles_endpoint(
-    lat: float = Query(..., description="Latitud de referencia"),
-    lng: float = Query(..., description="Longitud de referencia"),
-    radius: Optional[float] = Query(..., description="Radio de búsqueda en km"),
     fecha_inicio: Optional[str] = Query(None, description="Fecha de inicio (opcional)"),
     fecha_fin: Optional[str] = Query(None, description="Fecha de fin (opcional)"),
     cantidad_mascotas: Optional[int] = Query(None, description="Cantidad de mascotas (opcional)"),
     db: Session = Depends(get_db)
 ):
-    return get_cuidadores_disponibles(db, lat, lng, radius, fecha_inicio, fecha_fin, cantidad_mascotas)
+    return get_cuidadores_disponibles(db, fecha_inicio, fecha_fin, cantidad_mascotas)
 
 
 @router.get("/recibir/{id_cuidador}", response_model=CuidadorResponse)

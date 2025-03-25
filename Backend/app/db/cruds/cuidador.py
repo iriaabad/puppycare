@@ -1,18 +1,51 @@
 from sqlalchemy.orm import Session, joinedload
-from db.models.models import Cuidador, User
+from db.models.models import Cuidador, User, Reserva
 from schemas.cuidador import CuidadorCreate, CuidadorUpdate
-from typing import Optional
-
+from typing import Optional, List
+from datetime import datetime
 
 
 def get_cuidador(db: Session, id_cuidador: int):
     return db.query(Cuidador).filter(Cuidador.id_cuidador == id_cuidador).first()
 
-def get_cuidadores_disponibles(db: Session, lat: float, lng: float, radius: float,
-    fecha_inicio: Optional[str] = None, fecha_fin: Optional[str] = None,
-    cantidad_mascotas: Optional[int] = None):
-    cuidadores = db.query(Cuidador).options(joinedload(Cuidador.usuario)).all()
-    return cuidadores
+
+def parse_fecha(fecha_str: Optional[str]) -> Optional[datetime]:
+    if fecha_str:
+        try:
+            return datetime.strptime(fecha_str, "%Y-%m-%d")
+        except ValueError:
+            return None
+    return None
+
+def get_cuidadores_disponibles(db: Session, fecha_inicio: Optional[str], fecha_fin: Optional[str],
+                                cantidad_mascotas: Optional[int]) -> List:
+                                
+    # obtenemos TODOS los cuidadores
+    cuidadores = db.query(Cuidador).all()
+    cuidadores_disponibles = []
+
+    fecha_inicio_dt = parse_fecha(fecha_inicio)
+    fecha_fin_dt = parse_fecha(fecha_fin)
+    cantidad_nueva = int(cantidad_mascotas) if cantidad_mascotas is not None else 0
+
+    for cuidador in cuidadores:
+        # En base a fechas y cantidad, comprobamos las reservas existentes
+        if fecha_inicio_dt and fecha_fin_dt and cantidad_nueva:
+            reservas = db.query(Reserva).filter(
+                Reserva.cuidador_id_cuidador == cuidador.id_cuidador,
+                Reserva.fecha_fin >= fecha_inicio_dt,
+                Reserva.fecha_inicio <= fecha_fin_dt
+            ).all()
+
+            mascotas_reservadas = sum(reserva.cantidad_mascotas for reserva in reservas)
+            # Solo incluir si la suma no supera la capacidad del cuidador
+            if mascotas_reservadas + cantidad_nueva <= cuidador.capacidad_mascota:
+                cuidadores_disponibles.append(cuidador)
+        else:
+            # Si no se especifican fechas o cantidad, devolvemos todos los cuidadores
+            cuidadores_disponibles.append(cuidador)
+
+    return cuidadores_disponibles
 
 
 

@@ -18,6 +18,11 @@ class ReservaUpdate(ReservaBase):
 
 class ReservaResponse(ReservaBase):
     id_reserva: int
+    fecha_inicio: date
+    fecha_fin: date
+    cantidad_mascotas: int
+    nombre_cuidador: str
+    estado_reserva: str
 
     class Config:
         from_attributes = True  

@@ -9,37 +9,43 @@
 }
 
 /* Estilos para el header */
-.site-header {
+.menu {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
   display: flex;
-  /* margin-bottom: auto; */
+  align-items: center;
+  gap: clamp(20px, 40vw, 40vw);
 }
 
 /*Formato de la imagen del header*/
 .header-container {
+  margin-top: 10vh;
   position: relative;
   display: flex;
-  flex-direction: column;
   width: 100%;
+  max-width: 100vw;
+  overflow: hidden; 
+
 }
 
-.imgportada{
+.imgportada {
   height: 40vh;  
   object-fit: cover;
   object-position: center;
-;}
+  width: 100%;
+  z-index: -1; /* Envía la imagen al fondo para que el texto quede encima */
+  position: relative; /* Asegura que respete su contenedor */
+}
 
 
 .header-container h1 {
   position: absolute;
   font-family:Impact;
-  top: 50%;  /* mover verticalmente */
-  left: 30%; 
-  transform: translate(-50%, -50%); /* Ajuste fino */
+
+  transform: translate(0%, 0%); /* Ajuste fino */
   color: white; /* Asegurar visibilidad */
-  font-size: 8rem; /* Ajustar tamaño según necesidad */
+  font-size: clamp(6rem, 10vw, 14rem); /* Tamaño mínimo: 2rem, dinámico: 5% del ancho de la pantalla, máximo: 8rem */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Para mejorar contraste */
 }
 
@@ -48,7 +54,7 @@
 .site-body {
   flex: 1; /* Permite que el body ocupe el espacio disponible */
   padding: 20px;
-  margin-top: 8vh;
+  /* margin-top: 8vh; */
   overflow: hidden; /* Evita que el contenido desborde */
 }
 
@@ -118,17 +124,11 @@ button:hover {
 
 
 
-/* Estilo de la barra de navegación dentro del header
-.navbar-general {
-  justify-content: space-between;
-  padding: 10px 20px;
-  margin-bottom: 20px;
-}
- */
   /* Estilos generales para la barra de navegación */
   .navbar-general {
     display: flex;
-    justify-content: flex-start; /*Alinea los elementos a la izquierda*/
+    flex-direction: row;
+    justify-content:space-between; 
     align-items: center;
     background: rgba(255, 255, 255, 0.8); /*Fondo translúcido*/
     backdrop-filter: blur(10px); /* Efecto difuminado */ 
@@ -138,7 +138,6 @@ button:hover {
     top: 0;
     width: 100%;
     z-index: 1000;
-    display: flex;
     margin-bottom: 20px;
     gap: clamp(20px, 40vw, 40vw);
 }
@@ -179,6 +178,8 @@ button:hover {
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
 }
+
+
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {

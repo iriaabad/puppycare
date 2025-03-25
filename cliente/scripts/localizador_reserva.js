@@ -1,5 +1,24 @@
 // Se ejecuta cuando el DOM está completamente cargado
 document.addEventListener("DOMContentLoaded", async function () {
+    window.addEventListener('load', function () {
+        const today = new Date().toISOString().split('T')[0]; // Obtener la fecha de hoy en formato YYYY-MM-DD
+
+        // Asignar la fecha mínima a los campos de fecha
+        document.getElementById('fecha_inicio').setAttribute('min', today);
+        document.getElementById('fecha_fin').setAttribute('min', today);
+
+        // Validación al enviar el formulario
+        document.getElementById('reserva-form').addEventListener('submit', function (event) {
+            const fechaInicio = document.getElementById('fecha_inicio').value;
+            const fechaFin = document.getElementById('fecha_fin').value;
+
+            // Verificar que fecha_fin no sea anterior a fecha_inicio
+            if (fechaInicio && fechaFin && fechaFin < fechaInicio) {
+                alert("La fecha de fin no puede ser anterior a la fecha de inicio.");
+                event.preventDefault(); // Prevenir el envío del formulario
+            }
+        });
+    });
 
     // Verificar si la geolocalización está disponible y obtener la posición
     if (navigator.geolocation) {
@@ -217,17 +236,34 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return;
             }
 
-            // Obtener los detalles completos del cuidador seleccionado
+            // Obtener los detalles completos del cuidador seleccionado y las características de la reserva
             const detallesCuidador = await obtenerCuidadorPorId(id);
+
+
+            // Obtener el formulario correctamente
+            const form = document.getElementById("reserva-form");
+            if (!form) {
+                console.error("No se encontró el formulario con ID 'reserva-form'.");
+                return;
+            }
+
+            const formData = new FormData(form);
+            const fechaInicio = formData.get("fecha_inicio");
+            const fechaFin = formData.get("fecha_fin");
+            const cantidadMascotas = formData.get("cantidad_mascotas");
+
+            // Verificar que tarifaDia esté definido
+            const tarifaDia = detallesCuidador.tarifa_dia || 0;
+            const precioReserva = calcularPrecioReserva(fechaInicio, fechaFin, cantidadMascotas, tarifaDia);
 
             // Asignamos los detalles completos a la variable global
             cuidadorSeleccionado = detallesCuidador;
-
             // Actualizar los detalles en la interfaz
             document.getElementById("detalles-reserva").innerHTML = `
                 <h3>${detallesCuidador.usuario.nombre} ${detallesCuidador.usuario.apellido1}</h3>
                 <p>${detallesCuidador.descripcion}</p>
                 <p>Tarifa/día: ${detallesCuidador.tarifa_dia}€</p>
+                <p>Precio total: ${precioReserva}€</p>
         
                 <button id="submit-form">Confirmar reserva</button>
             `;
