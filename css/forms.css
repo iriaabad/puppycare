@@ -22,7 +22,6 @@
   
   .contenedor-main {
     display: flex;
-    flex-direction: column;
     justify-content: space-between; /* Espaciado entre columnas */
     gap: 20px; /* Espacio entre los elementos */
     padding: 5px;

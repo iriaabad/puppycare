@@ -21,8 +21,7 @@ class ReservaResponse(ReservaBase):
     fecha_inicio: date
     fecha_fin: date
     cantidad_mascotas: int
-    nombre_cuidador: str
-    estado_reserva: str
+
 
     class Config:
         from_attributes = True  

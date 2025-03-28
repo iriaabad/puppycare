@@ -370,7 +370,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 .then(response => {
                     if (response.ok) {
                         alert("Reserva creada correctamente");
-                        form.reset();
+                        window.location.reload();
+
                     } else {
                         alert("Error al crear la reserva");
                     }

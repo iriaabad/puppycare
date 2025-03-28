@@ -67,6 +67,14 @@
   margin-top: auto; /* Asegura que el footer se mantenga al final */
 }
 
+.contenedor-main-cuidador {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaciado entre columnas */
+  gap: 20px; /* Espacio entre los elementos */
+  padding: 5px;
+}
+
 /* Estilos generales para el body */
 body {
   font-family: 'Roboto', sans-serif; /* Fuente de la página */
