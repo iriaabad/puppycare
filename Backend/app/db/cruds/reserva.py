@@ -23,7 +23,7 @@ def get_reservas_cliente(db: Session, id_cliente: int, skip: int = 0, limit: int
             Reserva.precio_total, 
             EstadoReserva.id_estado.label("estado_reserva_id_estado"),  
             User.nombre.label("nombre_cuidador"),
-            EstadoReserva.descripcion.label("estado_reserva")
+            EstadoReserva.descripcion.label("descripcion")
         )
         .join(Cuidador, Reserva.cuidador_id_cuidador == Cuidador.id_cuidador)
         .join(User, Cuidador.usuario_id_usuario == User.id_usuario)  
@@ -32,9 +32,13 @@ def get_reservas_cliente(db: Session, id_cliente: int, skip: int = 0, limit: int
         .offset(skip)
         .limit(limit)
         .all()
+        
     )
 
     return reservas
+
+
+
 
 def create_reserva(db: Session, reserva: ReservaCreate):
     # Obtener la capacidad del cuidador

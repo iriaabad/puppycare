@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from datetime import date
+from typing import Optional  
+
 
 class ReservaBase(BaseModel):
     cliente_id_cliente: int
@@ -21,6 +23,9 @@ class ReservaResponse(ReservaBase):
     fecha_inicio: date
     fecha_fin: date
     cantidad_mascotas: int
+    nombre_cuidador: Optional[str] = None  # Campo opcional
+    estado_reserva_id_estado: Optional[int] = None  # Campo opcional
+    descripcion: Optional[str] = None  # Campo opcional
 
 
     class Config:

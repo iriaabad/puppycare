@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok) {
                 alert("Usuario autenticado");
-                const prevPage = sessionStorage.getItem("prevPage") || "//localhost/puppyCare/PuppyCare/index.html";
+                const prevPage = sessionStorage.getItem("prevPage") || window.location.reload();
                 window.location.href = prevPage; // Redirige a la página anterior o al inicio
             } else {
                 const errorData = await response.json();

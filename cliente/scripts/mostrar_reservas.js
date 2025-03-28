@@ -58,7 +58,6 @@ async function loadReservas(id_cliente) {
         <p><strong>Cantidad de Mascotas:</strong> ${reserva.cantidad_mascotas}</p>
         <p><strong>Precio Total:</strong> ${reserva.precio_total.toFixed(2)}€</p>
         <p><strong>Cuidador:</strong> ${reserva.nombre_cuidador}</p>
-        <p><strong>Estado:</strong> ${reserva.estado_reserva}</p>
             `;
             container.appendChild(card);
         });
