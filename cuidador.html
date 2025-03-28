@@ -8,8 +8,8 @@
   <title>Cuidadores de mascotas</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/forms.css">
-  <script src="scripts/cuidadorlogin_redireccionsicorrecto.js"></script>
 </head>
+
 <body class="site-container">
   <header>
     <div id="header-placeholder"></div>
@@ -30,71 +30,89 @@
         </p>
         <p class="ofertalogin">¿Ya tienes cuenta? <a href="" id="ofertalogin">Inicia sesión para continuar el
             registro</a></p>
-        <div id="formulariocrearcuenta-placeholder">
-        </div>
-        <!-- Formulario de login -->
-        <div id="formulariologin" style="display: none;"></div>
-        <div id="formularioparte2">
-          <form id="formulariocrearcuentacuidador2" class="form-cuenta" style="display: none;">
-            <h2>Completa los datos en tu cuenta</h2>
-            <div class="form-group">
-              <label for="calle">Calle:</label>
-              <input type="text" name="calle" id="calle" class="form-box" required placeholder="Nombre de la calle"><br>
-            </div>
-            <div class="form-group">
-              <label for="numero">Número:</label>
-              <input type="text" name="numero" id="numero" class="form-box" required placeholder="Número"><br>
-            </div>
-            <div class="form-group">
-              <label for="piso" class="label">Piso:</label>
-              <input type="text" name="piso" id="piso" class="form-box" required placeholder="Piso">
-            </div>
-            <div class="form-group">
-              <label for="codigopostal" class="label">Código Postal:</label>
-              <input type="text" name="codigopostal" id="codigopostal" class="form-box" required
-                placeholder="Código postal">
-            </div>
-            <div class="form-group">
-              <label for="ciudad" class="label">Ciudad:</label>
-              <input type="text" name="ciudad" id="ciudad" required class="form-box" required placeholder="Ciudad">
-            </div>
-            <button type="submit">Siguiente</button>
-          </form>
-        </div>
-        <div id="formularioparte3">
-          <form id="formulariocrearcuentacuidador3" class="form-cuenta" style="display: none;">
-            <div class="form-group">
-              <label for="tarifa_dia"></label>
-              <input type="text" name="tarifa_dia" id="tarifa_dia" class="form-box" required
-                placeholder="Tarifa diaria"><br>
-            </div>
-            <div class="form-group">
-              <label for="capacidad_mascota">Cantidad de mascotas que puedes alojar:</label>
-              <input type="number" name="capacidad_mascota" id="capacidad_mascota" class="form-box" required
-                placeholder="Cantidad"><br>
-            </div>
-            <div class="form-group">
-              <label for="descripcion" class="label">Preséntate en una frase:</label>
-              <input type="text" name="descripcion" id="descripcion" class="form-box" required
-                placeholder="Algo sobre tí">
-            </div>
-            <div class="form-group">
-              <label for="disponibilidad_activa" class="label">¿Quieres comenzar a recibir solicitudes de
-                reserva?</label>
-              <input type="checkbox" name="disponibilidad_activa" id="disponibilidad_activa" class="form-box" checked>
-            </div>
-            <button type="submit">Finalizar registro</button>
-          </form>
-        </div>
+        <form id="formulariocrearcuenta" class="form-cuenta">
+          <div class="form-group">
+            <label for="email" class="label"></label>
+            <input type="email" name="email" id="emailcrear" required class="form-box" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="nombre" class="label"></label>
+            <input type="text" name="nombre" id="nombre" required class="form-box" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="apellido1" class="label"></label>
+            <input type="text" name="apellido1" id="apellido1" required class="form-box" placeholder="Primer apellido">
+          </div>
+          <div class="form-group">
+            <label for="apellido2" class="label"></label>
+            <input type="text" name="apellido2" id="apellido2" class="form-box" placeholder="Segundo apellido">
+          </div>
+          <div class="form-group">
+            <label for="password" class="label"></label>
+            <input type="password" name="password" id="passwordcrear" required class="form-box"
+              placeholder="Contraseña">
+          </div>
+          <h2>Añade tu dirección</h2>
+          <div class="form-group">
+            <label for="calle"></label>
+            <input type="text" name="calle" id="calle" class="form-box" required placeholder="Nombre de la calle"><br>
+          </div>
+          <div class="form-group">
+            <label for="numero"></label>
+            <input type="text" name="numero" id="numero" class="form-box" required placeholder="Número"><br>
+          </div>
+          <div class="form-group">
+            <label for="piso" class="label"></label>
+            <input type="text" name="piso" id="piso" class="form-box" required placeholder="Piso">
+          </div>
+          <div class="form-group">
+            <label for="codigopostal" class="label"></label>
+            <input type="text" name="codigopostal" id="codigopostal" class="form-box" required
+              placeholder="Código postal">
+          </div>
+          <div class="form-group">
+            <label for="ciudad" class="label"></label>
+            <input type="text" name="ciudad" id="ciudad" required class="form-box" required placeholder="Ciudad">
+          </div>
+          <button type="submit">Crear cuenta</button>
+        </form>
+
       </div>
+      <!-- Formulario de login -->
+      <div id="formulariologin" style="display: none;"></div>
+      <form id="formulariocrearcuentacuidador3" class="form-cuenta" style="display: none;">
+        <div class="form-group">
+          <label for="tarifa_dia"></label>
+          <input type="text" name="tarifa_dia" id="tarifa_dia" class="form-box" required
+            placeholder="Tarifa diaria"><br>
+        </div>
+        <div class="form-group">
+          <label for="capacidad_mascota"></label>
+          <input type="number" name="capacidad_mascota" id="capacidad_mascota" class="form-box" required
+            placeholder="Cantidad de mascotas a alojar"><br>
+        </div>
+        <div class="form-group">
+          <label for="descripcion" class="label">
+          </label>
+          <input type="text" name="descripcion" id="descripcion" class="form-box" required placeholder="Algo sobre tí">
+        </div>
+        <div class="form-group">
+          <label for="disponibilidad_activa" class="labelcheck">¿Quieres comenzar a recibir solicitudes de
+            reserva?</label>
+          <input type="checkbox" name="disponibilidad_activa" id="disponibilidad_activa" class="form-box" checked>
+        </div>
+        <button type="submit">Finalizar registro</button>
+      </form>
+    </div>
   </main>
   <div id="footer-placeholder">
 
-  <!-- Enlace a los scripts externos -->
-  <script src="scripts/script_maestro.js"></script>
-  <script src="/puppyCare/PuppyCare/scripts/cuidador_crearcuentaform.js"></script>
-  <script src="/puppyCare/PuppyCare/scripts/actualizar_datoUsuario.js"></script>
-  <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
-</div>
+    <!-- Enlace a los scripts externos -->
+    <script src="scripts/script_maestro.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/cuidador_crearcuentaform.js"></script>
+    <script src="/puppyCare/PuppyCare/scripts/login_validar.js"></script>
+
+  </div>
 </body>
+
 </html>

@@ -22,6 +22,7 @@
   
   .contenedor-main {
     display: flex;
+    flex-direction: column;
     justify-content: space-between; /* Espaciado entre columnas */
     gap: 20px; /* Espacio entre los elementos */
     padding: 5px;
@@ -90,6 +91,17 @@
       pointer-events: none;
       transition: 0.3s ease;
   }
+
+  .labelcheck {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
   
   .form-box:focus + .label,
   .form-box:not(:placeholder-shown) + .label {
